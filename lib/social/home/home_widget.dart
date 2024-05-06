@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'home_model.dart';
@@ -88,13 +89,13 @@ class _HomeWidgetState extends State<HomeWidget> {
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
+            primary: false,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 RefreshIndicator(
                   onRefresh: () async {
                     setState(() => _model.listViewPagingController?.refresh());
-                    await _model.waitForOnePageForListView();
                   },
                   child: PagedListView<ApiPagingParams, dynamic>.separated(
                     pagingController: _model.setListViewController(
@@ -103,7 +104,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    primary: false,
                     shrinkWrap: true,
                     reverse: false,
                     scrollDirection: Axis.vertical,
@@ -179,8 +179,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
-                                            child: Image.network(
-                                              postsItem.user.image,
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  const Duration(milliseconds: 0),
+                                              fadeOutDuration:
+                                                  const Duration(milliseconds: 0),
+                                              imageUrl: postsItem.user.image,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -320,25 +324,46 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           PageTransition(
                                             type: PageTransitionType.fade,
                                             child: FlutterFlowExpandedImageView(
-                                              image: Image.network(
-                                                postsItem.image,
+                                              image: CachedNetworkImage(
+                                                fadeInDuration:
+                                                    const Duration(milliseconds: 0),
+                                                fadeOutDuration:
+                                                    const Duration(milliseconds: 0),
+                                                imageUrl:
+                                                    valueOrDefault<String>(
+                                                  postsItem.image,
+                                                  'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
+                                                ),
                                                 fit: BoxFit.contain,
                                               ),
                                               allowRotation: false,
-                                              tag: postsItem.image,
+                                              tag: valueOrDefault<String>(
+                                                postsItem.image,
+                                                'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png' '$postsIndex',
+                                              ),
                                               useHeroAnimation: true,
                                             ),
                                           ),
                                         );
                                       },
                                       child: Hero(
-                                        tag: postsItem.image,
+                                        tag: valueOrDefault<String>(
+                                          postsItem.image,
+                                          'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png' '$postsIndex',
+                                        ),
                                         transitionOnUserGestures: true,
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(12.0),
-                                          child: Image.network(
-                                            postsItem.image,
+                                          child: CachedNetworkImage(
+                                            fadeInDuration:
+                                                const Duration(milliseconds: 0),
+                                            fadeOutDuration:
+                                                const Duration(milliseconds: 0),
+                                            imageUrl: valueOrDefault<String>(
+                                              postsItem.image,
+                                              'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
+                                            ),
                                             width: double.infinity,
                                             height: 200.0,
                                             fit: BoxFit.cover,

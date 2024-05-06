@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -571,8 +570,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
               color: FlutterFlowTheme.of(context).headerText,
               size: 30.0,
             ),
-            onPressed: () async {
-              await action_blocks.getUserNavigate(context);
+            onPressed: () {
+              print('IconButton pressed ...');
             },
           ),
           title: Text(

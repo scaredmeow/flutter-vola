@@ -285,6 +285,7 @@ class _CreateNewPostWidgetState extends State<CreateNewPostWidget> {
                               content: _model.postContentTextController.text,
                               image: _model.uploadedFileUrl,
                             );
+                            context.safePop();
 
                             setState(() {});
                           },

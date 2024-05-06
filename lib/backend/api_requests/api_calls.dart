@@ -34,7 +34,8 @@ class GetUserByUIDCall {
 
 class GetAllPostsCall {
   static Future<ApiCallResponse> call({
-    int? offset = 0,
+    int? offset,
+    int? limit,
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Get All Posts',
@@ -43,6 +44,7 @@ class GetAllPostsCall {
       headers: {},
       params: {
         'offset': offset,
+        'limit': limit,
       },
       returnBody: true,
       encodeBodyUtf8: false,

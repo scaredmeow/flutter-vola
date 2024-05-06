@@ -51,11 +51,12 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
                         listViewGetAllPostsResponse.jsonBody)!
                     .data ??
                 [])
+            .take(25 - nextPageMarker.numItems)
             .toList() as List;
         final newNumItems = nextPageMarker.numItems + pageItems.length;
         listViewPagingController?.appendPage(
           pageItems,
-          (pageItems.isNotEmpty)
+          (pageItems.isNotEmpty) && newNumItems < 25
               ? ApiPagingParams(
                   nextPageNumber: nextPageMarker.nextPageNumber + 1,
                   numItems: newNumItems,
