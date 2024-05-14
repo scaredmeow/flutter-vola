@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -33,19 +32,13 @@ class GetUserByUIDCall {
 }
 
 class GetAllPostsCall {
-  static Future<ApiCallResponse> call({
-    int? offset,
-    int? limit,
-  }) async {
+  static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
       callName: 'Get All Posts',
       apiUrl: 'https://py-flask-vola.onrender.com/api/v1/posts',
       callType: ApiCallType.GET,
       headers: {},
-      params: {
-        'offset': offset,
-        'limit': limit,
-      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -53,11 +46,6 @@ class GetAllPostsCall {
       alwaysAllowBody: false,
     );
   }
-
-  static dynamic data(dynamic response) => getJsonField(
-        response,
-        r'''$.data[:]''',
-      );
 }
 
 class UpdateUserProfileCall {
@@ -121,6 +109,73 @@ class CreateNewPostCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetAllTeamsCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get All Teams',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/teams/',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CreateANewTeamCall {
+  static Future<ApiCallResponse> call({
+    int? sportsId,
+    String? userId = '',
+    String? name = '',
+    String? description = '',
+    String? image = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "sport_id": $sportsId,
+  "user_id": "$userId",
+  "name": "$name",
+  "description": "$description",
+  "image": "$image"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create a new team',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/teams/',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetAllSportsCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get All Sports',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/sports/',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

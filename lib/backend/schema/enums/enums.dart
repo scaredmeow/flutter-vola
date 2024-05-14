@@ -7,6 +7,10 @@ enum Roles {
   STAFF,
 }
 
+enum Sports {
+  Basketball,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -20,6 +24,8 @@ T? deserializeEnum<T>(String? value) {
   switch (T) {
     case (Roles):
       return Roles.values.deserialize(value) as T?;
+    case (Sports):
+      return Sports.values.deserialize(value) as T?;
     default:
       return null;
   }

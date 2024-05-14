@@ -89,7 +89,7 @@ class DataStruct extends BaseStruct {
       _commentsCount = commentsCount + amount;
   bool hasCommentsCount() => _commentsCount != null;
 
-  // "Image" field.
+  // "image" field.
   String? _image;
   String get image => _image ?? '';
   set image(String? val) => _image = val;
@@ -108,7 +108,7 @@ class DataStruct extends BaseStruct {
         postDateStringRepr: data['post_date_string_repr'] as String?,
         user: UserStruct.maybeFromMap(data['user']),
         commentsCount: castToType<int>(data['comments_count']),
-        image: data['Image'] as String?,
+        image: data['image'] as String?,
       );
 
   static DataStruct? maybeFromMap(dynamic data) =>
@@ -124,7 +124,7 @@ class DataStruct extends BaseStruct {
         'post_date_string_repr': _postDateStringRepr,
         'user': _user?.toMap(),
         'comments_count': _commentsCount,
-        'Image': _image,
+        'image': _image,
       }.withoutNulls;
 
   @override
@@ -166,7 +166,7 @@ class DataStruct extends BaseStruct {
           _commentsCount,
           ParamType.int,
         ),
-        'Image': serializeParam(
+        'image': serializeParam(
           _image,
           ParamType.String,
         ),
@@ -222,7 +222,7 @@ class DataStruct extends BaseStruct {
           false,
         ),
         image: deserializeParam(
-          data['Image'],
+          data['image'],
           ParamType.String,
           false,
         ),

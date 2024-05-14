@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,7 +11,6 @@ import '/backend/supabase/supabase.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 
 void main() async {
@@ -22,7 +22,13 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
 
-  runApp(const MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -124,6 +130,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'Home': const HomeWidget(),
       'Teams': const TeamsWidget(),
+      'team_dashboard': const TeamDashboardWidget(),
       'Settings': const SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -139,7 +146,7 @@ class _NavBarPageState extends State<NavBarPage> {
         backgroundColor: Colors.white,
         selectedItemColor: FlutterFlowTheme.of(context).primary,
         unselectedItemColor: const Color(0x8A000000),
-        showSelectedLabels: false,
+        showSelectedLabels: true,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -150,7 +157,7 @@ class _NavBarPageState extends State<NavBarPage> {
             activeIcon: Icon(
               Icons.home_rounded,
             ),
-            label: '',
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -161,6 +168,16 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.people_rounded,
             ),
             label: 'Teams',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.dashboard_outlined,
+            ),
+            activeIcon: Icon(
+              Icons.dashboard_rounded,
+            ),
+            label: 'Dashboard',
             tooltip: '',
           ),
           BottomNavigationBarItem(

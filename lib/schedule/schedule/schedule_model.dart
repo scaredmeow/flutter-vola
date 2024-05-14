@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dashboard_widget.dart' show DashboardWidget;
+import 'schedule_widget.dart' show ScheduleWidget;
 import 'package:flutter/material.dart';
 
-class DashboardModel extends FlutterFlowModel<DashboardWidget> {
+class ScheduleModel extends FlutterFlowModel<ScheduleWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

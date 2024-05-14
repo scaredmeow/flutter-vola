@@ -76,7 +76,7 @@ class _TrainingGuideWidgetState extends State<TrainingGuideWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 32.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 32.0, 8.0, 0.0),
                   child: Text(
                     'Physical Trainings',
                     style: FlutterFlowTheme.of(context).titleMedium.override(
@@ -294,7 +294,8 @@ class _TrainingGuideWidgetState extends State<TrainingGuideWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                   child: Text(
                     'Fitness Training Aftercare',
                     style: FlutterFlowTheme.of(context).titleMedium.override(

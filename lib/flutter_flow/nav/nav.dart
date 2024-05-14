@@ -91,18 +91,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               params.isEmpty ? const NavBarPage(initialPage: 'Home') : const HomeWidget(),
         ),
         FFRoute(
-          name: 'PostDetails',
-          path: '/postDetails',
-          builder: (context, params) => const PostDetailsWidget(),
-        ),
-        FFRoute(
           name: 'CreateNewPost',
           path: '/createNewPost',
+          requireAuth: true,
           builder: (context, params) => const CreateNewPostWidget(),
         ),
         FFRoute(
           name: 'Statistics',
           path: '/statistics',
+          requireAuth: true,
           builder: (context, params) => const StatisticsWidget(),
         ),
         FFRoute(
@@ -114,12 +111,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Onboarding',
           path: '/onboarding',
           builder: (context, params) => const OnboardingWidget(),
-        ),
-        FFRoute(
-          name: 'Dashboard',
-          path: '/dashboard',
-          requireAuth: true,
-          builder: (context, params) => const DashboardWidget(),
         ),
         FFRoute(
           name: 'Signup',
@@ -160,6 +151,58 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           requireAuth: true,
           builder: (context, params) =>
               params.isEmpty ? const NavBarPage(initialPage: 'Teams') : const TeamsWidget(),
+        ),
+        FFRoute(
+          name: 'CreateATeam',
+          path: '/createATeam',
+          requireAuth: true,
+          builder: (context, params) => const CreateATeamWidget(),
+        ),
+        FFRoute(
+          name: 'Schedule',
+          path: '/schedule',
+          requireAuth: true,
+          builder: (context, params) => const ScheduleWidget(),
+        ),
+        FFRoute(
+          name: 'team_page',
+          path: '/teamPage',
+          requireAuth: true,
+          builder: (context, params) => const TeamPageWidget(),
+        ),
+        FFRoute(
+          name: 'CreateASchedule',
+          path: '/createASchedule',
+          builder: (context, params) => const CreateAScheduleWidget(),
+        ),
+        FFRoute(
+          name: 'Event',
+          path: '/event',
+          builder: (context, params) => const EventWidget(),
+        ),
+        FFRoute(
+          name: 'PlayerProfile',
+          path: '/playerProfile',
+          builder: (context, params) => const PlayerProfileWidget(),
+        ),
+        FFRoute(
+          name: 'team_dashboard',
+          path: '/teamDashboard',
+          requireAuth: true,
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'team_dashboard')
+              : const TeamDashboardWidget(),
+        ),
+        FFRoute(
+          name: 'terms',
+          path: '/terms',
+          builder: (context, params) => const TermsWidget(),
+        ),
+        FFRoute(
+          name: 'CreateAScheduleCopy',
+          path: '/createAScheduleCopy',
+          requireAuth: true,
+          builder: (context, params) => const CreateAScheduleCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -418,4 +461,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }
