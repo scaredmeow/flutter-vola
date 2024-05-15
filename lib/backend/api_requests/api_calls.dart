@@ -142,6 +142,7 @@ class UpdateUserProfileCall {
     String? birthdate = '',
     String? image = '',
     String? phoneNumber = '',
+    String? requestedRole = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -152,7 +153,8 @@ class UpdateUserProfileCall {
   "gender": "$gender",
   "phone_number": "$phoneNumber",
   "birthdate": "$birthdate",
-  "image": "$image"
+  "image": "$image",
+  "requested_role": "$requestedRole"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update User Profile',

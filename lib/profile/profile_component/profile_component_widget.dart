@@ -902,6 +902,7 @@ class _ProfileComponentWidgetState extends State<ProfileComponentWidget> {
                           birthdate: _model.birthdateTextController.text,
                           image: _model.uploadedFileUrl,
                           phoneNumber: _model.phoneNumberTextController.text,
+                          requestedRole: _model.coachAthletValue,
                         );
                         await widget.navigateAction?.call();
                       },

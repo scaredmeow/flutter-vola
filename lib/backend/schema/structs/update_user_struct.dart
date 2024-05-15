@@ -17,6 +17,7 @@ class UpdateUserStruct extends BaseStruct {
     String? middleName,
     String? phoneNumber,
     String? uid,
+    String? requestedRole,
   })  : _activeRole = activeRole,
         _birthdate = birthdate,
         _createdAt = createdAt,
@@ -27,7 +28,8 @@ class UpdateUserStruct extends BaseStruct {
         _lastName = lastName,
         _middleName = middleName,
         _phoneNumber = phoneNumber,
-        _uid = uid;
+        _uid = uid,
+        _requestedRole = requestedRole;
 
   // "active_role" field.
   ActiveRoleStruct? _activeRole;
@@ -97,6 +99,12 @@ class UpdateUserStruct extends BaseStruct {
   set uid(String? val) => _uid = val;
   bool hasUid() => _uid != null;
 
+  // "requested_role" field.
+  String? _requestedRole;
+  String get requestedRole => _requestedRole ?? '';
+  set requestedRole(String? val) => _requestedRole = val;
+  bool hasRequestedRole() => _requestedRole != null;
+
   static UpdateUserStruct fromMap(Map<String, dynamic> data) =>
       UpdateUserStruct(
         activeRole: ActiveRoleStruct.maybeFromMap(data['active_role']),
@@ -110,6 +118,7 @@ class UpdateUserStruct extends BaseStruct {
         middleName: data['middle_name'] as String?,
         phoneNumber: data['phone_number'] as String?,
         uid: data['uid'] as String?,
+        requestedRole: data['requested_role'] as String?,
       );
 
   static UpdateUserStruct? maybeFromMap(dynamic data) => data is Map
@@ -128,6 +137,7 @@ class UpdateUserStruct extends BaseStruct {
         'middle_name': _middleName,
         'phone_number': _phoneNumber,
         'uid': _uid,
+        'requested_role': _requestedRole,
       }.withoutNulls;
 
   @override
@@ -174,6 +184,10 @@ class UpdateUserStruct extends BaseStruct {
         ),
         'uid': serializeParam(
           _uid,
+          ParamType.String,
+        ),
+        'requested_role': serializeParam(
+          _requestedRole,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -236,6 +250,11 @@ class UpdateUserStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        requestedRole: deserializeParam(
+          data['requested_role'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -254,7 +273,8 @@ class UpdateUserStruct extends BaseStruct {
         lastName == other.lastName &&
         middleName == other.middleName &&
         phoneNumber == other.phoneNumber &&
-        uid == other.uid;
+        uid == other.uid &&
+        requestedRole == other.requestedRole;
   }
 
   @override
@@ -269,7 +289,8 @@ class UpdateUserStruct extends BaseStruct {
         lastName,
         middleName,
         phoneNumber,
-        uid
+        uid,
+        requestedRole
       ]);
 }
 
@@ -285,6 +306,7 @@ UpdateUserStruct createUpdateUserStruct({
   String? middleName,
   String? phoneNumber,
   String? uid,
+  String? requestedRole,
 }) =>
     UpdateUserStruct(
       activeRole: activeRole ?? ActiveRoleStruct(),
@@ -298,4 +320,5 @@ UpdateUserStruct createUpdateUserStruct({
       middleName: middleName,
       phoneNumber: phoneNumber,
       uid: uid,
+      requestedRole: requestedRole,
     );
