@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/unauthorizedacc_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'teams_widget.dart' show TeamsWidget;
@@ -9,13 +10,18 @@ class TeamsModel extends FlutterFlowModel<TeamsWidget> {
 
   final unfocusNode = FocusNode();
   Completer<ApiCallResponse>? apiRequestCompleter;
+  // Model for unauthorizedacc component.
+  late UnauthorizedaccModel unauthorizedaccModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    unauthorizedaccModel = createModel(context, () => UnauthorizedaccModel());
+  }
 
   @override
   void dispose() {
     unfocusNode.dispose();
+    unauthorizedaccModel.dispose();
   }
 
   /// Additional helper methods.

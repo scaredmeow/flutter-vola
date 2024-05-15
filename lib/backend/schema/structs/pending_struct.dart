@@ -4,26 +4,18 @@
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class TeamMembersStruct extends BaseStruct {
-  TeamMembersStruct({
-    UserStruct? user,
+class PendingStruct extends BaseStruct {
+  PendingStruct({
     int? id,
     bool? isOwner,
     String? joinedAt,
-    int? taskCount,
-  })  : _user = user,
-        _id = id,
+    bool? pending,
+    UserStruct? user,
+  })  : _id = id,
         _isOwner = isOwner,
         _joinedAt = joinedAt,
-        _taskCount = taskCount;
-
-  // "user" field.
-  UserStruct? _user;
-  UserStruct get user => _user ?? UserStruct();
-  set user(UserStruct? val) => _user = val;
-  void updateUser(Function(UserStruct) updateFn) =>
-      updateFn(_user ??= UserStruct());
-  bool hasUser() => _user != null;
+        _pending = pending,
+        _user = user;
 
   // "id" field.
   int? _id;
@@ -44,40 +36,41 @@ class TeamMembersStruct extends BaseStruct {
   set joinedAt(String? val) => _joinedAt = val;
   bool hasJoinedAt() => _joinedAt != null;
 
-  // "task_count" field.
-  int? _taskCount;
-  int get taskCount => _taskCount ?? 0;
-  set taskCount(int? val) => _taskCount = val;
-  void incrementTaskCount(int amount) => _taskCount = taskCount + amount;
-  bool hasTaskCount() => _taskCount != null;
+  // "pending" field.
+  bool? _pending;
+  bool get pending => _pending ?? false;
+  set pending(bool? val) => _pending = val;
+  bool hasPending() => _pending != null;
 
-  static TeamMembersStruct fromMap(Map<String, dynamic> data) =>
-      TeamMembersStruct(
-        user: UserStruct.maybeFromMap(data['user']),
+  // "user" field.
+  UserStruct? _user;
+  UserStruct get user => _user ?? UserStruct();
+  set user(UserStruct? val) => _user = val;
+  void updateUser(Function(UserStruct) updateFn) =>
+      updateFn(_user ??= UserStruct());
+  bool hasUser() => _user != null;
+
+  static PendingStruct fromMap(Map<String, dynamic> data) => PendingStruct(
         id: castToType<int>(data['id']),
         isOwner: data['is_owner'] as bool?,
         joinedAt: data['joined_at'] as String?,
-        taskCount: castToType<int>(data['task_count']),
+        pending: data['pending'] as bool?,
+        user: UserStruct.maybeFromMap(data['user']),
       );
 
-  static TeamMembersStruct? maybeFromMap(dynamic data) => data is Map
-      ? TeamMembersStruct.fromMap(data.cast<String, dynamic>())
-      : null;
+  static PendingStruct? maybeFromMap(dynamic data) =>
+      data is Map ? PendingStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        'user': _user?.toMap(),
         'id': _id,
         'is_owner': _isOwner,
         'joined_at': _joinedAt,
-        'task_count': _taskCount,
+        'pending': _pending,
+        'user': _user?.toMap(),
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'user': serializeParam(
-          _user,
-          ParamType.DataStruct,
-        ),
         'id': serializeParam(
           _id,
           ParamType.int,
@@ -90,20 +83,18 @@ class TeamMembersStruct extends BaseStruct {
           _joinedAt,
           ParamType.String,
         ),
-        'task_count': serializeParam(
-          _taskCount,
-          ParamType.int,
+        'pending': serializeParam(
+          _pending,
+          ParamType.bool,
+        ),
+        'user': serializeParam(
+          _user,
+          ParamType.DataStruct,
         ),
       }.withoutNulls;
 
-  static TeamMembersStruct fromSerializableMap(Map<String, dynamic> data) =>
-      TeamMembersStruct(
-        user: deserializeStructParam(
-          data['user'],
-          ParamType.DataStruct,
-          false,
-          structBuilder: UserStruct.fromSerializableMap,
-        ),
+  static PendingStruct fromSerializableMap(Map<String, dynamic> data) =>
+      PendingStruct(
         id: deserializeParam(
           data['id'],
           ParamType.int,
@@ -119,42 +110,48 @@ class TeamMembersStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        taskCount: deserializeParam(
-          data['task_count'],
-          ParamType.int,
+        pending: deserializeParam(
+          data['pending'],
+          ParamType.bool,
           false,
+        ),
+        user: deserializeStructParam(
+          data['user'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: UserStruct.fromSerializableMap,
         ),
       );
 
   @override
-  String toString() => 'TeamMembersStruct(${toMap()})';
+  String toString() => 'PendingStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is TeamMembersStruct &&
-        user == other.user &&
+    return other is PendingStruct &&
         id == other.id &&
         isOwner == other.isOwner &&
         joinedAt == other.joinedAt &&
-        taskCount == other.taskCount;
+        pending == other.pending &&
+        user == other.user;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([user, id, isOwner, joinedAt, taskCount]);
+      const ListEquality().hash([id, isOwner, joinedAt, pending, user]);
 }
 
-TeamMembersStruct createTeamMembersStruct({
-  UserStruct? user,
+PendingStruct createPendingStruct({
   int? id,
   bool? isOwner,
   String? joinedAt,
-  int? taskCount,
+  bool? pending,
+  UserStruct? user,
 }) =>
-    TeamMembersStruct(
-      user: user ?? UserStruct(),
+    PendingStruct(
       id: id,
       isOwner: isOwner,
       joinedAt: joinedAt,
-      taskCount: taskCount,
+      pending: pending,
+      user: user ?? UserStruct(),
     );

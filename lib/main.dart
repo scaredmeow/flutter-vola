@@ -131,6 +131,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'Home': const HomeWidget(),
       'Teams': const TeamsWidget(),
       'team_dashboard': const TeamDashboardWidget(),
+      'Schedule': const ScheduleWidget(),
       'Settings': const SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -178,6 +179,16 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.dashboard_rounded,
             ),
             label: 'Dashboard',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.event_outlined,
+            ),
+            activeIcon: Icon(
+              Icons.event,
+            ),
+            label: 'Events',
             tooltip: '',
           ),
           BottomNavigationBarItem(

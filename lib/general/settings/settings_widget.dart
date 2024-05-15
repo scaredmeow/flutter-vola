@@ -334,7 +334,7 @@ class _SettingsWidgetState extends State<SettingsWidget>
                       ),
                       if (valueOrDefault<bool>(
                         (String userRole) {
-                          return userRole == "ATHLETE" ? false : true;
+                          return userRole == "ATHLETE" ? true : false;
                         }(FFAppState().userRole),
                         false,
                       ))

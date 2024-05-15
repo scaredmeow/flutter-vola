@@ -8,7 +8,15 @@ import 'dashboard_summary_model.dart';
 export 'dashboard_summary_model.dart';
 
 class DashboardSummaryWidget extends StatefulWidget {
-  const DashboardSummaryWidget({super.key});
+  const DashboardSummaryWidget({
+    super.key,
+    double? percentage,
+    String? label,
+  })  : percentage = percentage ?? 0.0,
+        label = label ?? '0%';
+
+  final double percentage;
+  final String label;
 
   @override
   State<DashboardSummaryWidget> createState() => _DashboardSummaryWidgetState();
@@ -141,7 +149,7 @@ class _DashboardSummaryWidgetState extends State<DashboardSummaryWidget>
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                         child: Text(
-                          'Athletes progression',
+                          'Combine progression of athletes',
                           style:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -154,7 +162,10 @@ class _DashboardSummaryWidgetState extends State<DashboardSummaryWidget>
                 ),
               ),
               CircularPercentIndicator(
-                percent: 0.78,
+                percent: valueOrDefault<double>(
+                  widget.percentage,
+                  0.0,
+                ),
                 radius: 50.0,
                 lineWidth: 8.0,
                 animation: true,
@@ -162,7 +173,7 @@ class _DashboardSummaryWidgetState extends State<DashboardSummaryWidget>
                 progressColor: FlutterFlowTheme.of(context).primary,
                 backgroundColor: FlutterFlowTheme.of(context).accent1,
                 center: Text(
-                  '78%',
+                  widget.label,
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Outfit',
                         letterSpacing: 0.0,

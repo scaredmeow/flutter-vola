@@ -41,6 +41,8 @@ class _HomeWidgetState extends State<HomeWidget> {
             .roleName,
         'USER',
       );
+      FFAppState().teamID =
+          UserStruct.maybeFromMap((_model.getUserRole?.jsonBody ?? ''))!.teamId;
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));

@@ -103,11 +103,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const StatisticsWidget(),
         ),
         FFRoute(
-          name: 'TrainingGuide',
-          path: '/trainingGuide',
-          builder: (context, params) => const TrainingGuideWidget(),
-        ),
-        FFRoute(
           name: 'Onboarding',
           path: '/onboarding',
           builder: (context, params) => const OnboardingWidget(),
@@ -162,13 +157,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Schedule',
           path: '/schedule',
           requireAuth: true,
-          builder: (context, params) => const ScheduleWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'Schedule')
+              : const ScheduleWidget(),
         ),
         FFRoute(
           name: 'team_page',
           path: '/teamPage',
           requireAuth: true,
-          builder: (context, params) => const TeamPageWidget(),
+          builder: (context, params) => TeamPageWidget(
+            teamId: params.getParam(
+              'teamId',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'CreateASchedule',
@@ -203,6 +205,43 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/createAScheduleCopy',
           requireAuth: true,
           builder: (context, params) => const CreateAScheduleCopyWidget(),
+        ),
+        FFRoute(
+          name: 'unauthorized',
+          path: '/unauthorized',
+          builder: (context, params) => const UnauthorizedWidget(),
+        ),
+        FFRoute(
+          name: 'NewTask',
+          path: '/newTask',
+          builder: (context, params) => const NewTaskWidget(),
+        ),
+        FFRoute(
+          name: 'TrainingGuideTask',
+          path: '/trainingGuideTask',
+          builder: (context, params) => const TrainingGuideTaskWidget(),
+        ),
+        FFRoute(
+          name: 'tasksview',
+          path: '/tasksview',
+          builder: (context, params) => TasksviewWidget(
+            name: params.getParam(
+              'name',
+              ParamType.String,
+            ),
+            date: params.getParam(
+              'date',
+              ParamType.String,
+            ),
+            description: params.getParam(
+              'description',
+              ParamType.String,
+            ),
+            taskId: params.getParam(
+              'taskId',
+              ParamType.int,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

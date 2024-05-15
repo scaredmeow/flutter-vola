@@ -17,6 +17,7 @@ class UserStruct extends BaseStruct {
     String? phoneNumber,
     String? uid,
     String? image,
+    String? teamId,
   })  : _activeRole = activeRole,
         _birthdate = birthdate,
         _createdAt = createdAt,
@@ -27,7 +28,8 @@ class UserStruct extends BaseStruct {
         _middleName = middleName,
         _phoneNumber = phoneNumber,
         _uid = uid,
-        _image = image;
+        _image = image,
+        _teamId = teamId;
 
   // "active_role" field.
   ActiveRoleStruct? _activeRole;
@@ -97,6 +99,12 @@ class UserStruct extends BaseStruct {
   set image(String? val) => _image = val;
   bool hasImage() => _image != null;
 
+  // "team_id" field.
+  String? _teamId;
+  String get teamId => _teamId ?? '';
+  set teamId(String? val) => _teamId = val;
+  bool hasTeamId() => _teamId != null;
+
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
         activeRole: ActiveRoleStruct.maybeFromMap(data['active_role']),
         birthdate: data['birthdate'] as String?,
@@ -109,6 +117,7 @@ class UserStruct extends BaseStruct {
         phoneNumber: data['phone_number'] as String?,
         uid: data['uid'] as String?,
         image: data['image'] as String?,
+        teamId: data['team_id'] as String?,
       );
 
   static UserStruct? maybeFromMap(dynamic data) =>
@@ -126,6 +135,7 @@ class UserStruct extends BaseStruct {
         'phone_number': _phoneNumber,
         'uid': _uid,
         'image': _image,
+        'team_id': _teamId,
       }.withoutNulls;
 
   @override
@@ -172,6 +182,10 @@ class UserStruct extends BaseStruct {
         ),
         'image': serializeParam(
           _image,
+          ParamType.String,
+        ),
+        'team_id': serializeParam(
+          _teamId,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -234,6 +248,11 @@ class UserStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        teamId: deserializeParam(
+          data['team_id'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -252,7 +271,8 @@ class UserStruct extends BaseStruct {
         middleName == other.middleName &&
         phoneNumber == other.phoneNumber &&
         uid == other.uid &&
-        image == other.image;
+        image == other.image &&
+        teamId == other.teamId;
   }
 
   @override
@@ -267,7 +287,8 @@ class UserStruct extends BaseStruct {
         middleName,
         phoneNumber,
         uid,
-        image
+        image,
+        teamId
       ]);
 }
 
@@ -283,6 +304,7 @@ UserStruct createUserStruct({
   String? phoneNumber,
   String? uid,
   String? image,
+  String? teamId,
 }) =>
     UserStruct(
       activeRole: activeRole ?? ActiveRoleStruct(),
@@ -296,4 +318,5 @@ UserStruct createUserStruct({
       phoneNumber: phoneNumber,
       uid: uid,
       image: image,
+      teamId: teamId,
     );

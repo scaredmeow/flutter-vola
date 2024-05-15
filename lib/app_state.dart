@@ -21,6 +21,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _userRole = prefs.getString('ff_userRole') ?? _userRole;
     });
+    _safeInit(() {
+      _teamID = prefs.getString('ff_teamID') ?? _teamID;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -35,6 +38,13 @@ class FFAppState extends ChangeNotifier {
   set userRole(String value) {
     _userRole = value;
     prefs.setString('ff_userRole', value);
+  }
+
+  String _teamID = '';
+  String get teamID => _teamID;
+  set teamID(String value) {
+    _teamID = value;
+    prefs.setString('ff_teamID', value);
   }
 
   final _sportListManager = FutureRequestManager<ApiCallResponse>();

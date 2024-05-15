@@ -1,4 +1,3 @@
-import '/auth/supabase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,40 +5,34 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'create_a_schedule_model.dart';
-export 'create_a_schedule_model.dart';
+import 'new_task_model.dart';
+export 'new_task_model.dart';
 
-class CreateAScheduleWidget extends StatefulWidget {
-  const CreateAScheduleWidget({super.key});
+class NewTaskWidget extends StatefulWidget {
+  const NewTaskWidget({super.key});
 
   @override
-  State<CreateAScheduleWidget> createState() => _CreateAScheduleWidgetState();
+  State<NewTaskWidget> createState() => _NewTaskWidgetState();
 }
 
-class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
-  late CreateAScheduleModel _model;
+class _NewTaskWidgetState extends State<NewTaskWidget> {
+  late NewTaskModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CreateAScheduleModel());
+    _model = createModel(context, () => NewTaskModel());
 
-    _model.gameTitleTextController ??= TextEditingController();
-    _model.gameTitleFocusNode ??= FocusNode();
-
-    _model.openentTextController ??= TextEditingController();
-    _model.openentFocusNode ??= FocusNode();
-
-    _model.gameDateTextController ??= TextEditingController();
-    _model.gameDateFocusNode ??= FocusNode();
-
-    _model.locationTextController ??= TextEditingController();
-    _model.locationFocusNode ??= FocusNode();
+    _model.titleTextController ??= TextEditingController();
+    _model.titleFocusNode ??= FocusNode();
 
     _model.descriptionTextController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
+
+    _model.duedateTextController ??= TextEditingController();
+    _model.duedateFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -78,7 +71,7 @@ class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
             },
           ),
           title: Text(
-            'Schedule',
+            'Training Guide',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).headerText,
@@ -103,7 +96,7 @@ class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 16.0),
                     child: Text(
-                      'Create Game Schedule',
+                      'Create a new training task',
                       style:
                           FlutterFlowTheme.of(context).headlineLarge.override(
                                 fontFamily: 'Outfit',
@@ -115,13 +108,13 @@ class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
                     child: TextFormField(
-                      controller: _model.gameTitleTextController,
-                      focusNode: _model.gameTitleFocusNode,
+                      controller: _model.titleTextController,
+                      focusNode: _model.titleFocusNode,
                       autofocus: false,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Game Title',
-                        hintText: 'Enter game title...',
+                        labelText: 'Routine Title',
+                        hintText: 'Enter training routine title...',
                         hintStyle:
                             FlutterFlowTheme.of(context).bodyLarge.override(
                                   fontFamily: 'Readex Pro',
@@ -160,168 +153,7 @@ class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
                             fontFamily: 'Readex Pro',
                             letterSpacing: 0.0,
                           ),
-                      validator: _model.gameTitleTextControllerValidator
-                          .asValidator(context),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
-                    child: TextFormField(
-                      controller: _model.openentTextController,
-                      focusNode: _model.openentFocusNode,
-                      autofocus: false,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'Opponent Team',
-                        hintText: 'Enter opponent team name...',
-                        hintStyle:
-                            FlutterFlowTheme.of(context).bodyLarge.override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0.0,
-                                ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            letterSpacing: 0.0,
-                          ),
-                      validator: _model.openentTextControllerValidator
-                          .asValidator(context),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
-                    child: TextFormField(
-                      controller: _model.gameDateTextController,
-                      focusNode: _model.gameDateFocusNode,
-                      autofocus: false,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'Game Date',
-                        hintText: 'Select date...',
-                        hintStyle:
-                            FlutterFlowTheme.of(context).bodyLarge.override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0.0,
-                                ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            letterSpacing: 0.0,
-                          ),
-                      keyboardType: TextInputType.datetime,
-                      validator: _model.gameDateTextControllerValidator
-                          .asValidator(context),
-                      inputFormatters: [_model.gameDateMask],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
-                    child: TextFormField(
-                      controller: _model.locationTextController,
-                      focusNode: _model.locationFocusNode,
-                      autofocus: false,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'Location',
-                        hintText: 'Enter location...',
-                        hintStyle:
-                            FlutterFlowTheme.of(context).bodyLarge.override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0.0,
-                                ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            letterSpacing: 0.0,
-                          ),
-                      validator: _model.locationTextControllerValidator
+                      validator: _model.titleTextControllerValidator
                           .asValidator(context),
                     ),
                   ),
@@ -334,8 +166,8 @@ class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
                       autofocus: false,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Description',
-                        hintText: 'Enter description...',
+                        labelText: 'Routine Description',
+                        hintText: 'Enter routine description...',
                         hintStyle:
                             FlutterFlowTheme.of(context).bodyLarge.override(
                                   fontFamily: 'Readex Pro',
@@ -380,24 +212,77 @@ class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
                   ),
                   Padding(
                     padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
+                    child: TextFormField(
+                      controller: _model.duedateTextController,
+                      focusNode: _model.duedateFocusNode,
+                      autofocus: false,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        labelText: 'Due Date',
+                        hintText: 'Select date...',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).bodyLarge.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
+                      keyboardType: TextInputType.datetime,
+                      validator: _model.duedateTextControllerValidator
+                          .asValidator(context),
+                      inputFormatters: [_model.duedateMask],
+                    ),
+                  ),
+                  Padding(
+                    padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        _model.apiResult2s7 = await CreateANewScheduleCall.call(
-                          userId: currentUserUid,
+                        _model.apiResultano = await CreateTasksCall.call(
                           teamId: int.parse(FFAppState().teamID),
-                          description: _model.descriptionTextController.text,
-                          opponent: _model.openentTextController.text,
-                          title: _model.gameTitleTextController.text,
-                          date: _model.gameDateTextController.text,
-                          location: _model.locationTextController.text,
+                          taskName: _model.titleTextController.text,
+                          taskDescription:
+                              _model.descriptionTextController.text,
+                          taskDate: _model.duedateTextController.text,
                         );
 
-                        context.goNamed('Schedule');
+                        context.goNamed('team_dashboard');
 
                         setState(() {});
                       },
-                      text: 'Create Schedule',
+                      text: 'Create Task',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 48.0,

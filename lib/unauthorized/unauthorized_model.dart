@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'training_guide_widget.dart' show TrainingGuideWidget;
+import 'unauthorized_widget.dart' show UnauthorizedWidget;
 import 'package:flutter/material.dart';
 
-class TrainingGuideModel extends FlutterFlowModel<TrainingGuideWidget> {
+class UnauthorizedModel extends FlutterFlowModel<UnauthorizedWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

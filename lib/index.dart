@@ -3,8 +3,6 @@ export '/social/home/home_widget.dart' show HomeWidget;
 export '/social/create_new_post/create_new_post_widget.dart'
     show CreateNewPostWidget;
 export '/athletes/statistics/statistics_widget.dart' show StatisticsWidget;
-export '/athletes/training_guide/training_guide_widget.dart'
-    show TrainingGuideWidget;
 export '/auth/onboarding/onboarding_widget.dart' show OnboardingWidget;
 export '/auth/signup/signup_widget.dart' show SignupWidget;
 export '/auth/login/login_widget.dart' show LoginWidget;
@@ -25,3 +23,8 @@ export '/teams/team_dashboard/team_dashboard_widget.dart'
 export '/general/terms/terms_widget.dart' show TermsWidget;
 export '/teams/create_a_schedule_copy/create_a_schedule_copy_widget.dart'
     show CreateAScheduleCopyWidget;
+export '/unauthorized/unauthorized_widget.dart' show UnauthorizedWidget;
+export '/teams/new_task/new_task_widget.dart' show NewTaskWidget;
+export '/training_guide_task/training_guide_task_widget.dart'
+    show TrainingGuideTaskWidget;
+export '/athletes/tasksview/tasksview_widget.dart' show TasksviewWidget;

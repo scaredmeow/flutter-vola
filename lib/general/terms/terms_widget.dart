@@ -78,7 +78,7 @@ class _TermsWidgetState extends State<TermsWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 8.0),
                   child: Text(
-                    'Last updated: January 1, 2023',
+                    'Last updated: May 1, 2024',
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Readex Pro',
                           letterSpacing: 0.0,
@@ -122,6 +122,94 @@ class _TermsWidgetState extends State<TermsWidget> {
                       const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 16.0),
                   child: Text(
                     'The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.',
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
+                  child: Text(
+                    'Scope and Limitations',
+                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                  child: Text(
+                    'Scope',
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 16.0),
+                  child: Text(
+                    'The app includes features to improve the sporting experience for users, such as performance tracking, communication tools, strategic planning interfaces, scheduling systems, social interaction, and training resources.',
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                  child: Text(
+                    'Limitations',
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 16.0),
+                  child: Text(
+                    'This app does not provide personalized training modules or resources tailored to individual athlete’s strategic gameplays or training guidelines, which should be determined by coaching staff based on performance progression.',
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
+                  child: Text(
+                    'Project Development and Definitions',
+                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                  child: Text(
+                    'Development',
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 16.0),
+                  child: Text(
+                    'The development of Vola: The Project involves transforming ideas into a centralized platform for collaboration among athletes, coaches, and staff, enhancing communication, scheduling, and performance tracking.',
                     style: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Readex Pro',
                           letterSpacing: 0.0,
