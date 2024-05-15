@@ -1,9 +1,11 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/backend/schema/structs/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,6 +21,7 @@ class ProfileComponentWidget extends StatefulWidget {
     required this.navigateAction,
     this.imageButtonText,
     this.email,
+    this.showText,
   })  : title = title ?? 'Edit Profile',
         confirmButtonText = confirmButtonText ?? 'Save Changes';
 
@@ -27,6 +30,7 @@ class ProfileComponentWidget extends StatefulWidget {
   final Future Function()? navigateAction;
   final String? imageButtonText;
   final String? email;
+  final bool? showText;
 
   @override
   State<ProfileComponentWidget> createState() => _ProfileComponentWidgetState();
@@ -843,6 +847,39 @@ class _ProfileComponentWidgetState extends State<ProfileComponentWidget> {
                     validator: _model.birthdateTextControllerValidator
                         .asValidator(context),
                     inputFormatters: [_model.birthdateMask],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  child: FlutterFlowDropDown<String>(
+                    controller: _model.coachAthletValueController ??=
+                        FormFieldController<String>(null),
+                    options: const ['Coach', 'Athlete'],
+                    onChanged: (val) =>
+                        setState(() => _model.coachAthletValue = val),
+                    width: double.infinity,
+                    height: 56.0,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                    hintText: 'Please select if you are a Coach or Athlete...',
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    elevation: 2.0,
+                    borderColor: FlutterFlowTheme.of(context).alternate,
+                    borderWidth: 2.0,
+                    borderRadius: 8.0,
+                    margin:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                    hidesUnderline: true,
+                    isOverButton: true,
+                    isSearchable: false,
+                    isMultiSelect: false,
                   ),
                 ),
                 Align(

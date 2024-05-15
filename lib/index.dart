@@ -21,8 +21,7 @@ export '/player_profile/player_profile_widget.dart' show PlayerProfileWidget;
 export '/teams/team_dashboard/team_dashboard_widget.dart'
     show TeamDashboardWidget;
 export '/general/terms/terms_widget.dart' show TermsWidget;
-export '/teams/create_a_schedule_copy/create_a_schedule_copy_widget.dart'
-    show CreateAScheduleCopyWidget;
+export '/teams/edit_stats/edit_stats_widget.dart' show EditStatsWidget;
 export '/unauthorized/unauthorized_widget.dart' show UnauthorizedWidget;
 export '/teams/new_task/new_task_widget.dart' show NewTaskWidget;
 export '/training_guide_task/training_guide_task_widget.dart'

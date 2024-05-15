@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/components/unauthorizedacc_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
@@ -9,7 +8,8 @@ class TeamsModel extends FlutterFlowModel<TeamsWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  Completer<ApiCallResponse>? apiRequestCompleter;
+  bool apiRequestCompleted = false;
+  String? apiRequestLastUniqueKey;
   // Model for unauthorizedacc component.
   late UnauthorizedaccModel unauthorizedaccModel;
 
@@ -33,7 +33,7 @@ class TeamsModel extends FlutterFlowModel<TeamsWidget> {
     while (true) {
       await Future.delayed(const Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
+      final requestComplete = apiRequestCompleted;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

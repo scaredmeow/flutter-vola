@@ -90,8 +90,10 @@ class _SettingsWidgetState extends State<SettingsWidget>
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
-      future: GetUserByUIDCall.call(
-        uid: currentUserUid,
+      future: _model.profile(
+        requestFn: () => GetUserByUIDCall.call(
+          uid: currentUserUid,
+        ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.

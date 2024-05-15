@@ -4,7 +4,6 @@ import '/components/unauthorizedacc_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'schedule_model.dart';
@@ -117,10 +116,14 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                         ),
                       ),
                       FutureBuilder<ApiCallResponse>(
-                        future: (_model.apiRequestCompleter ??=
-                                Completer<ApiCallResponse>()
-                                  ..complete(GetAllSchedulesCall.call()))
-                            .future,
+                        future: _model
+                            .schedules(
+                          requestFn: () => GetAllSchedulesCall.call(),
+                        )
+                            .then((result) {
+                          _model.apiRequestCompleted = true;
+                          return result;
+                        }),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -154,8 +157,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                                       [];
                               return RefreshIndicator(
                                 onRefresh: () async {
-                                  setState(
-                                      () => _model.apiRequestCompleter = null);
+                                  setState(() {
+                                    _model.clearSchedulesCache();
+                                    _model.apiRequestCompleted = false;
+                                  });
                                   await _model.waitForApiRequestCompleted();
                                 },
                                 child: ListView.builder(
@@ -280,7 +285,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                   child: wrapWithModel(
                     model: _model.unauthorizedaccModel,
                     updateCallback: () => setState(() {}),
-                    child: const UnauthorizedaccWidget(),
+                    child: const UnauthorizedaccWidget(
+                      title: 'Unauthorized Access',
+                      details:
+                          'You do not have permission to access this content. Please contact the administrator (admin@vola.com) for assistance. ',
+                    ),
                   ),
                 ),
             ],

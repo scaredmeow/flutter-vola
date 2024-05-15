@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'profile_component_widget.dart' show ProfileComponentWidget;
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -42,6 +43,9 @@ class ProfileComponentModel extends FlutterFlowModel<ProfileComponentWidget> {
   final birthdateMask = MaskTextInputFormatter(mask: '####-##-##');
   String? Function(BuildContext, String?)? birthdateTextControllerValidator;
   DateTime? datePicked;
+  // State field(s) for coachAthlet widget.
+  String? coachAthletValue;
+  FormFieldController<String>? coachAthletValueController;
 
   @override
   void initState(BuildContext context) {}

@@ -15,6 +15,7 @@ export 'percentage_struct.dart';
 export 'progress_struct.dart';
 export 'sport_struct.dart';
 export 'sports_struct.dart';
+export 'stats_struct.dart';
 export 'tasks_list_struct.dart';
 export 'team_members_struct.dart';
 export 'teams_list_struct.dart';

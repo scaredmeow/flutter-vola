@@ -1,5 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/request_manager.dart';
+
 import 'dart:async';
 import 'home_widget.dart' show HomeWidget;
 import 'package:flutter/material.dart';
@@ -10,7 +12,25 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (Get User by UID)] action in Home widget.
   ApiCallResponse? getUserRole;
-  Completer<ApiCallResponse>? apiRequestCompleter;
+  bool apiRequestCompleted = false;
+  String? apiRequestLastUniqueKey;
+
+  /// Query cache managers for this widget.
+
+  final _socialManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> social({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _socialManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearSocialCache() => _socialManager.clear();
+  void clearSocialCacheKey(String? uniqueKey) =>
+      _socialManager.clearRequest(uniqueKey);
 
   @override
   void initState(BuildContext context) {}
@@ -18,6 +38,10 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
+
+    /// Dispose query cache managers for this widget.
+
+    clearSocialCache();
   }
 
   /// Additional helper methods.
@@ -29,7 +53,7 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
     while (true) {
       await Future.delayed(const Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
+      final requestComplete = apiRequestCompleted;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

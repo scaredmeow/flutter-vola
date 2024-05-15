@@ -65,6 +65,73 @@ class GetAllSchedulesCall {
   }
 }
 
+class DeleteStatsCall {
+  static Future<ApiCallResponse> call({
+    int? id,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Delete Stats',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/teams/stats/$id',
+      callType: ApiCallType.DELETE,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: true,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetStatsCall {
+  static Future<ApiCallResponse> call({
+    String? userId = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Stats',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/teams/stats/$userId',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: true,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CreateNewStatsCall {
+  static Future<ApiCallResponse> call({
+    String? statsKey = '',
+    String? statsValue = '',
+    String? userId = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "stats_key": "$statsKey",
+  "stats_value": "$statsValue",
+  "user_id": "$userId"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create New Stats',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/teams/stats/add',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: true,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class UpdateUserProfileCall {
   static Future<ApiCallResponse> call({
     String? uid = '',

@@ -1,6 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/unauthorizedacc_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/request_manager.dart';
+
 import 'dart:async';
 import 'schedule_widget.dart' show ScheduleWidget;
 import 'package:flutter/material.dart';
@@ -9,9 +11,27 @@ class ScheduleModel extends FlutterFlowModel<ScheduleWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  Completer<ApiCallResponse>? apiRequestCompleter;
+  bool apiRequestCompleted = false;
+  String? apiRequestLastUniqueKey;
   // Model for unauthorizedacc component.
   late UnauthorizedaccModel unauthorizedaccModel;
+
+  /// Query cache managers for this widget.
+
+  final _schedulesManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> schedules({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _schedulesManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearSchedulesCache() => _schedulesManager.clear();
+  void clearSchedulesCacheKey(String? uniqueKey) =>
+      _schedulesManager.clearRequest(uniqueKey);
 
   @override
   void initState(BuildContext context) {
@@ -22,6 +42,10 @@ class ScheduleModel extends FlutterFlowModel<ScheduleWidget> {
   void dispose() {
     unfocusNode.dispose();
     unauthorizedaccModel.dispose();
+
+    /// Dispose query cache managers for this widget.
+
+    clearSchedulesCache();
   }
 
   /// Additional helper methods.
@@ -33,7 +57,7 @@ class ScheduleModel extends FlutterFlowModel<ScheduleWidget> {
     while (true) {
       await Future.delayed(const Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
+      final requestComplete = apiRequestCompleted;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

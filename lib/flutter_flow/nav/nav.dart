@@ -201,10 +201,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const TermsWidget(),
         ),
         FFRoute(
-          name: 'CreateAScheduleCopy',
-          path: '/createAScheduleCopy',
+          name: 'EditStats',
+          path: '/editStats',
           requireAuth: true,
-          builder: (context, params) => const CreateAScheduleCopyWidget(),
+          builder: (context, params) => EditStatsWidget(
+            userId: params.getParam(
+              'userId',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'unauthorized',

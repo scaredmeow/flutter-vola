@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'teams_model.dart';
@@ -164,10 +163,14 @@ class _TeamsWidgetState extends State<TeamsWidget> {
                               ),
                             ),
                             FutureBuilder<ApiCallResponse>(
-                              future: (_model.apiRequestCompleter ??=
-                                      Completer<ApiCallResponse>()
-                                        ..complete(GetAllTeamsCall.call()))
-                                  .future,
+                              future: FFAppState()
+                                  .teamList(
+                                requestFn: () => GetAllTeamsCall.call(),
+                              )
+                                  .then((result) {
+                                _model.apiRequestCompleted = true;
+                                return result;
+                              }),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
@@ -203,8 +206,10 @@ class _TeamsWidgetState extends State<TeamsWidget> {
                                             [];
                                     return RefreshIndicator(
                                       onRefresh: () async {
-                                        setState(() =>
-                                            _model.apiRequestCompleter = null);
+                                        setState(() {
+                                          FFAppState().clearTeamListCache();
+                                          _model.apiRequestCompleted = false;
+                                        });
                                         await _model
                                             .waitForApiRequestCompleted();
                                       },
@@ -414,7 +419,11 @@ class _TeamsWidgetState extends State<TeamsWidget> {
                   child: wrapWithModel(
                     model: _model.unauthorizedaccModel,
                     updateCallback: () => setState(() {}),
-                    child: const UnauthorizedaccWidget(),
+                    child: const UnauthorizedaccWidget(
+                      title: 'Unauthorized Access',
+                      details:
+                          'You do not have permission to access this content. Please contact the administrator (admin@vola.com) for assistance. ',
+                    ),
                   ),
                 ),
             ],

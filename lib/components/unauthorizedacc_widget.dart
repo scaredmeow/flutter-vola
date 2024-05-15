@@ -5,7 +5,14 @@ import 'unauthorizedacc_model.dart';
 export 'unauthorizedacc_model.dart';
 
 class UnauthorizedaccWidget extends StatefulWidget {
-  const UnauthorizedaccWidget({super.key});
+  const UnauthorizedaccWidget({
+    super.key,
+    String? title,
+    required this.details,
+  }) : title = title ?? 'Information';
+
+  final String title;
+  final String? details;
 
   @override
   State<UnauthorizedaccWidget> createState() => _UnauthorizedaccWidgetState();
@@ -62,22 +69,29 @@ class _UnauthorizedaccWidgetState extends State<UnauthorizedaccWidget> {
                 color: FlutterFlowTheme.of(context).primary,
                 size: 60.0,
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Text(
-                  'Unauthorized Access',
-                  style: FlutterFlowTheme.of(context).titleLarge.override(
-                        fontFamily: 'Outfit',
-                        color: FlutterFlowTheme.of(context).primary,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                      ),
+              Align(
+                alignment: const AlignmentDirectional(0.0, 0.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  child: Text(
+                    widget.title,
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).titleLarge.override(
+                          fontFamily: 'Outfit',
+                          color: FlutterFlowTheme.of(context).primary,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                 child: Text(
-                  'You do not have permission to access this content. Please contact the administrator for assistance.',
+                  valueOrDefault<String>(
+                    widget.details,
+                    'You do not have permission to access this content. Please contact the administrator (admin@vola.com) for assistance. ',
+                  ),
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Readex Pro',
