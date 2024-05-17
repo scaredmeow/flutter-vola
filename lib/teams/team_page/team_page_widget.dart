@@ -295,11 +295,17 @@ class _TeamPageWidgetState extends State<TeamPageWidget> {
                       ),
                     ),
                     if (valueOrDefault<bool>(
-                      (String userRole, String teamId) {
-                        return userRole != "COACH" && teamId.isNotEmpty
+                      (String userRole, String teamId, String realTeamID) {
+                        return userRole != "COACH" && teamId == realTeamID
                             ? true
                             : false;
-                      }(FFAppState().userRole, FFAppState().teamID),
+                      }(
+                          FFAppState().userRole,
+                          FFAppState().teamID,
+                          GetOneStruct.maybeFromMap(
+                                  teamPageGetOneTeamResponse.jsonBody)!
+                              .id
+                              .toString()),
                       false,
                     ))
                       Padding(
@@ -381,9 +387,17 @@ class _TeamPageWidgetState extends State<TeamPageWidget> {
                         ),
                       ),
                     if (valueOrDefault<bool>(
-                      (String userRole) {
-                        return userRole == "COACH" ? true : false;
-                      }(FFAppState().userRole),
+                      (String userRole, String teamID, String realTeamID) {
+                        return userRole == "COACH" && teamID == realTeamID
+                            ? true
+                            : false;
+                      }(
+                          FFAppState().userRole,
+                          widget.teamId!.toString(),
+                          GetOneStruct.maybeFromMap(
+                                  teamPageGetOneTeamResponse.jsonBody)!
+                              .id
+                              .toString()),
                       false,
                     ))
                       Padding(
@@ -391,6 +405,9 @@ class _TeamPageWidgetState extends State<TeamPageWidget> {
                             16.0, 0.0, 16.0, 32.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
+                            }
                             context.pushNamed('team_dashboard');
                           },
                           text: 'Manage Team',

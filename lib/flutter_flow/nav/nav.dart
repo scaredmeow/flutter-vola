@@ -212,11 +212,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'unauthorized',
-          path: '/unauthorized',
-          builder: (context, params) => const UnauthorizedWidget(),
-        ),
-        FFRoute(
           name: 'NewTask',
           path: '/newTask',
           builder: (context, params) => const NewTaskWidget(),
@@ -247,6 +242,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.int,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'teamSearch',
+          path: '/teamSearch',
+          requireAuth: true,
+          builder: (context, params) => TeamSearchWidget(
+            team: params.getParam(
+              'team',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'comments',
+          path: '/comments',
+          builder: (context, params) => const CommentsWidget(),
+        ),
+        FFRoute(
+          name: 'ForgotPassword01',
+          path: '/forgotPassword01',
+          builder: (context, params) => const ForgotPassword01Widget(),
+        ),
+        FFRoute(
+          name: 'forgotPassword',
+          path: '/forgotPassword',
+          builder: (context, params) => const ForgotPasswordWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

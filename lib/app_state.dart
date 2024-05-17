@@ -47,36 +47,6 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_teamID', value);
   }
 
-  final _sportListManager = FutureRequestManager<ApiCallResponse>();
-  Future<ApiCallResponse> sportList({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<ApiCallResponse> Function() requestFn,
-  }) =>
-      _sportListManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearSportListCache() => _sportListManager.clear();
-  void clearSportListCacheKey(String? uniqueKey) =>
-      _sportListManager.clearRequest(uniqueKey);
-
-  final _teamListManager = FutureRequestManager<ApiCallResponse>();
-  Future<ApiCallResponse> teamList({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<ApiCallResponse> Function() requestFn,
-  }) =>
-      _teamListManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearTeamListCache() => _teamListManager.clear();
-  void clearTeamListCacheKey(String? uniqueKey) =>
-      _teamListManager.clearRequest(uniqueKey);
-
   final _statsListManager = FutureRequestManager<ApiCallResponse>();
   Future<ApiCallResponse> statsList({
     String? uniqueQueryKey,

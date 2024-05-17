@@ -22,8 +22,13 @@ export '/teams/team_dashboard/team_dashboard_widget.dart'
     show TeamDashboardWidget;
 export '/general/terms/terms_widget.dart' show TermsWidget;
 export '/teams/edit_stats/edit_stats_widget.dart' show EditStatsWidget;
-export '/unauthorized/unauthorized_widget.dart' show UnauthorizedWidget;
 export '/teams/new_task/new_task_widget.dart' show NewTaskWidget;
 export '/training_guide_task/training_guide_task_widget.dart'
     show TrainingGuideTaskWidget;
 export '/athletes/tasksview/tasksview_widget.dart' show TasksviewWidget;
+export '/teams/team_search/team_search_widget.dart' show TeamSearchWidget;
+export '/social/comments/comments_widget.dart' show CommentsWidget;
+export '/forgot_password01/forgot_password01_widget.dart'
+    show ForgotPassword01Widget;
+export '/auth/forgot_password/forgot_password_widget.dart'
+    show ForgotPasswordWidget;

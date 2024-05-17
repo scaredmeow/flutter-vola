@@ -26,9 +26,9 @@ class TeamMembersRow extends SupabaseDataRow {
   String? get userId => getField<String>('user_id');
   set userId(String? value) => setField<String>('user_id', value);
 
-  int? get leagueId => getField<int>('league_id');
-  set leagueId(int? value) => setField<int>('league_id', value);
+  bool? get isOwner => getField<bool>('is_owner');
+  set isOwner(bool? value) => setField<bool>('is_owner', value);
 
-  int? get organizationId => getField<int>('organization_id');
-  set organizationId(int? value) => setField<int>('organization_id', value);
+  bool? get pending => getField<bool>('pending');
+  set pending(bool? value) => setField<bool>('pending', value);
 }

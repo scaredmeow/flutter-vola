@@ -1,6 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'create_a_team_widget.dart' show CreateATeamWidget;
 import 'package:flutter/material.dart';
 
@@ -34,9 +33,10 @@ class CreateATeamModel extends FlutterFlowModel<CreateATeamWidget> {
     return null;
   }
 
-  // State field(s) for DropDown widget.
-  int? dropDownValue;
-  FormFieldController<int>? dropDownValueController;
+  // State field(s) for sports widget.
+  FocusNode? sportsFocusNode;
+  TextEditingController? sportsTextController;
+  String? Function(BuildContext, String?)? sportsTextControllerValidator;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -59,5 +59,8 @@ class CreateATeamModel extends FlutterFlowModel<CreateATeamWidget> {
 
     descriptionFocusNode?.dispose();
     descriptionTextController?.dispose();
+
+    sportsFocusNode?.dispose();
+    sportsTextController?.dispose();
   }
 }

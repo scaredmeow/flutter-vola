@@ -321,7 +321,9 @@ class _CreateNewPostWidgetState extends State<CreateNewPostWidget> {
                                 content: _model.postContentTextController.text,
                                 image: _model.uploadedFileUrl,
                               );
-
+                              if (Navigator.of(context).canPop()) {
+                                context.pop();
+                              }
                               context.pushNamed('Home');
 
                               setState(() {});

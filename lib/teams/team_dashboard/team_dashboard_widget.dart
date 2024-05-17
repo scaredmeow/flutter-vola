@@ -482,17 +482,13 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     FutureBuilder<ApiCallResponse>(
-                                      future: _model
-                                          .memberRequest(
-                                        requestFn: () => GetPendingCall.call(
-                                          teamId:
-                                              int.parse(FFAppState().teamID),
-                                        ),
-                                      )
-                                          .then((result) {
-                                        _model.apiRequestCompleted1 = true;
-                                        return result;
-                                      }),
+                                      future: (_model.apiRequestCompleter1 ??=
+                                              Completer<ApiCallResponse>()
+                                                ..complete(GetPendingCall.call(
+                                                  teamId: int.parse(
+                                                      FFAppState().teamID),
+                                                )))
+                                          .future,
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
@@ -530,12 +526,9 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                                     [];
                                             return RefreshIndicator(
                                               onRefresh: () async {
-                                                setState(() {
-                                                  _model
-                                                      .clearMemberRequestCache();
-                                                  _model.apiRequestCompleted1 =
-                                                      false;
-                                                });
+                                                setState(() => _model
+                                                        .apiRequestCompleter1 =
+                                                    null);
                                                 await _model
                                                     .waitForApiRequestCompleted1();
                                               },
@@ -660,7 +653,7 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                                                               () async {
                                                                             _model.apiResultm1k =
                                                                                 await AcceptAPlayerCall.call(
-                                                                              userId: currentUserUid,
+                                                                              userId: pendingMembershipItem.user.uid,
                                                                               teamId: int.parse(FFAppState().teamID),
                                                                             );
 
@@ -706,7 +699,7 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                                                           _model.apiResultpsr =
                                                                               await RejectAPlayerCall.call(
                                                                             userId:
-                                                                                currentUserUid,
+                                                                                pendingMembershipItem.user.uid,
                                                                             teamId:
                                                                                 int.parse(FFAppState().teamID),
                                                                           );
@@ -824,16 +817,13 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
                                 child: FutureBuilder<ApiCallResponse>(
-                                  future: _model
-                                      .currentMember(
-                                    requestFn: () => GetOneTeamCall.call(
-                                      teamId: int.parse(FFAppState().teamID),
-                                    ),
-                                  )
-                                      .then((result) {
-                                    _model.apiRequestCompleted2 = true;
-                                    return result;
-                                  }),
+                                  future: (_model.apiRequestCompleter2 ??=
+                                          Completer<ApiCallResponse>()
+                                            ..complete(GetOneTeamCall.call(
+                                              teamId: int.parse(
+                                                  FFAppState().teamID),
+                                            )))
+                                      .future,
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
                                     if (!snapshot.hasData) {
@@ -864,11 +854,8 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                                 [];
                                         return RefreshIndicator(
                                           onRefresh: () async {
-                                            setState(() {
-                                              _model.clearCurrentMemberCache();
-                                              _model.apiRequestCompleted2 =
-                                                  false;
-                                            });
+                                            setState(() => _model
+                                                .apiRequestCompleter2 = null);
                                             await _model
                                                 .waitForApiRequestCompleted2();
                                           },
@@ -925,6 +912,7 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                                                 .center,
                                                         children: [
                                                           Container(
+                                                            width: 150.0,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: FlutterFlowTheme
@@ -1173,11 +1161,9 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                                 ),
                               ),
                               FutureBuilder<ApiCallResponse>(
-                                future: _model.taskTraining(
-                                  requestFn: () => GetAllPendingTasksCall.call(
-                                    userId: currentUserUid,
-                                    teamId: int.parse(FFAppState().teamID),
-                                  ),
+                                future: GetAllPendingTasksCall.call(
+                                  userId: currentUserUid,
+                                  teamId: int.parse(FFAppState().teamID),
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.

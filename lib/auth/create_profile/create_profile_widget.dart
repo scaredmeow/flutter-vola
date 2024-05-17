@@ -176,6 +176,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                           confirmButtonText: 'Save & Continue',
                           imageButtonText: 'Upload Image',
                           email: widget.email,
+                          showText: true,
                           navigateAction: () async {
                             context.pushNamed('Home');
                           },

@@ -98,6 +98,28 @@ class _TermsWidgetState extends State<TermsWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
                   child: Text(
+                    'Data Privacy Act Clause',
+                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                  child: Text(
+                    'Data Privacy',
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
+                  child: Text(
                     'Interpretation and Definitions',
                     style: FlutterFlowTheme.of(context).titleMedium.override(
                           fontFamily: 'Readex Pro',
@@ -248,6 +270,16 @@ class _TermsWidgetState extends State<TermsWidget> {
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
+                  child: Text(
+                    'Company (referred to as either \'the Company\', \'We\', \'Us\' or \'Our\' in this Agreement) refers to Your Company.',
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
                   child: Text(
                     'Service refers to the Website.',
@@ -339,6 +371,17 @@ class _TermsWidgetState extends State<TermsWidget> {
                       const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 32.0),
                   child: Text(
                     'If you have any questions about these Terms and Conditions, You can contact us.',
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 16.0),
+                  child: Text(
+                    'The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.',
                     style: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Readex Pro',
                           letterSpacing: 0.0,

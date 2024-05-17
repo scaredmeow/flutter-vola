@@ -227,6 +227,8 @@ dynamic deserializeParam<T>(
             return CommentsRow(data);
           case UserProfilesAthleteRow:
             return UserProfilesAthleteRow(data);
+          case PlayerStatsRow:
+            return PlayerStatsRow(data);
           case PostsRow:
             return PostsRow(data);
           case SportOrganizationsRow:
@@ -235,14 +237,20 @@ dynamic deserializeParam<T>(
             return GamesRow(data);
           case TeamMembersRow:
             return TeamMembersRow(data);
+          case TeamScheduleRow:
+            return TeamScheduleRow(data);
           case GameScoresRow:
             return GameScoresRow(data);
+          case TrainingTasksProgressRow:
+            return TrainingTasksProgressRow(data);
           case UserProfilesCoachRow:
             return UserProfilesCoachRow(data);
           case UserRolesRow:
             return UserRolesRow(data);
           case SportsRow:
             return SportsRow(data);
+          case TrainingTasksRow:
+            return TrainingTasksRow(data);
           case UserProfilesRow:
             return UserProfilesRow(data);
           case TeamsRow:

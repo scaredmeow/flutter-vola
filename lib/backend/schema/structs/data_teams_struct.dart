@@ -14,6 +14,7 @@ class DataTeamsStruct extends BaseStruct {
     SportStruct? sport,
     int? teamMemberCount,
     String? image,
+    String? sportsName,
   })  : _id = id,
         _createdAt = createdAt,
         _name = name,
@@ -21,7 +22,8 @@ class DataTeamsStruct extends BaseStruct {
         _teamMembers = teamMembers,
         _sport = sport,
         _teamMemberCount = teamMemberCount,
-        _image = image;
+        _image = image,
+        _sportsName = sportsName;
 
   // "id" field.
   int? _id;
@@ -78,6 +80,12 @@ class DataTeamsStruct extends BaseStruct {
   set image(String? val) => _image = val;
   bool hasImage() => _image != null;
 
+  // "sports_name" field.
+  String? _sportsName;
+  String get sportsName => _sportsName ?? '';
+  set sportsName(String? val) => _sportsName = val;
+  bool hasSportsName() => _sportsName != null;
+
   static DataTeamsStruct fromMap(Map<String, dynamic> data) => DataTeamsStruct(
         id: castToType<int>(data['id']),
         createdAt: data['created_at'] as String?,
@@ -90,6 +98,7 @@ class DataTeamsStruct extends BaseStruct {
         sport: SportStruct.maybeFromMap(data['sport']),
         teamMemberCount: castToType<int>(data['team_member_count']),
         image: data['image'] as String?,
+        sportsName: data['sports_name'] as String?,
       );
 
   static DataTeamsStruct? maybeFromMap(dynamic data) => data is Map
@@ -105,6 +114,7 @@ class DataTeamsStruct extends BaseStruct {
         'sport': _sport?.toMap(),
         'team_member_count': _teamMemberCount,
         'image': _image,
+        'sports_name': _sportsName,
       }.withoutNulls;
 
   @override
@@ -140,6 +150,10 @@ class DataTeamsStruct extends BaseStruct {
         ),
         'image': serializeParam(
           _image,
+          ParamType.String,
+        ),
+        'sports_name': serializeParam(
+          _sportsName,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -188,6 +202,11 @@ class DataTeamsStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        sportsName: deserializeParam(
+          data['sports_name'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -204,7 +223,8 @@ class DataTeamsStruct extends BaseStruct {
         listEquality.equals(teamMembers, other.teamMembers) &&
         sport == other.sport &&
         teamMemberCount == other.teamMemberCount &&
-        image == other.image;
+        image == other.image &&
+        sportsName == other.sportsName;
   }
 
   @override
@@ -216,7 +236,8 @@ class DataTeamsStruct extends BaseStruct {
         teamMembers,
         sport,
         teamMemberCount,
-        image
+        image,
+        sportsName
       ]);
 }
 
@@ -228,6 +249,7 @@ DataTeamsStruct createDataTeamsStruct({
   SportStruct? sport,
   int? teamMemberCount,
   String? image,
+  String? sportsName,
 }) =>
     DataTeamsStruct(
       id: id,
@@ -237,4 +259,5 @@ DataTeamsStruct createDataTeamsStruct({
       sport: sport ?? SportStruct(),
       teamMemberCount: teamMemberCount,
       image: image,
+      sportsName: sportsName,
     );

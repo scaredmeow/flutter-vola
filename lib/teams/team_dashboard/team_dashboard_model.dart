@@ -15,14 +15,12 @@ class TeamDashboardModel extends FlutterFlowModel<TeamDashboardWidget> {
   // Model for DashboardSummary component.
   late DashboardSummaryModel dashboardSummaryModel;
   Completer<ApiCallResponse>? apiRequestCompleter3;
-  bool apiRequestCompleted1 = false;
-  String? apiRequestLastUniqueKey1;
+  Completer<ApiCallResponse>? apiRequestCompleter1;
   // Stores action output result for [Backend Call - API (Accept a Player )] action in Button widget.
   ApiCallResponse? apiResultm1k;
   // Stores action output result for [Backend Call - API (Reject a Player)] action in Button widget.
   ApiCallResponse? apiResultpsr;
-  bool apiRequestCompleted2 = false;
-  String? apiRequestLastUniqueKey2;
+  Completer<ApiCallResponse>? apiRequestCompleter2;
   // Stores action output result for [Backend Call - API (Leave a Team)] action in Button widget.
   ApiCallResponse? apiResulttit;
   // Model for unauthorizedacc component.
@@ -62,21 +60,6 @@ class TeamDashboardModel extends FlutterFlowModel<TeamDashboardWidget> {
   void clearCurrentMemberCacheKey(String? uniqueKey) =>
       _currentMemberManager.clearRequest(uniqueKey);
 
-  final _taskTrainingManager = FutureRequestManager<ApiCallResponse>();
-  Future<ApiCallResponse> taskTraining({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<ApiCallResponse> Function() requestFn,
-  }) =>
-      _taskTrainingManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearTaskTrainingCache() => _taskTrainingManager.clear();
-  void clearTaskTrainingCacheKey(String? uniqueKey) =>
-      _taskTrainingManager.clearRequest(uniqueKey);
-
   @override
   void initState(BuildContext context) {
     dashboardSummaryModel = createModel(context, () => DashboardSummaryModel());
@@ -96,8 +79,6 @@ class TeamDashboardModel extends FlutterFlowModel<TeamDashboardWidget> {
     clearMemberRequestCache();
 
     clearCurrentMemberCache();
-
-    clearTaskTrainingCache();
   }
 
   /// Additional helper methods.
@@ -124,7 +105,7 @@ class TeamDashboardModel extends FlutterFlowModel<TeamDashboardWidget> {
     while (true) {
       await Future.delayed(const Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleted1;
+      final requestComplete = apiRequestCompleter1?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }
@@ -139,7 +120,7 @@ class TeamDashboardModel extends FlutterFlowModel<TeamDashboardWidget> {
     while (true) {
       await Future.delayed(const Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleted2;
+      final requestComplete = apiRequestCompleter2?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

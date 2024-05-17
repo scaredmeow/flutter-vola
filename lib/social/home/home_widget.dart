@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -114,14 +115,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 FutureBuilder<ApiCallResponse>(
-                  future: _model
-                      .social(
-                    requestFn: () => GetAllPostsCall.call(),
-                  )
-                      .then((result) {
-                    _model.apiRequestCompleted = true;
-                    return result;
-                  }),
+                  future: (_model.apiRequestCompleter ??=
+                          Completer<ApiCallResponse>()
+                            ..complete(GetAllPostsCall.call()))
+                      .future,
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -155,10 +152,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             .toList();
                         return RefreshIndicator(
                           onRefresh: () async {
-                            setState(() {
-                              _model.clearSocialCache();
-                              _model.apiRequestCompleted = false;
-                            });
+                            setState(() => _model.apiRequestCompleter = null);
                           },
                           child: ListView.separated(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -416,6 +410,81 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 ),
                                               ),
                                             ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderRadius: 20.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 40.0,
+                                                  icon: Icon(
+                                                    Icons.thumb_up_off_alt,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () {
+                                                    print(
+                                                        'IconButton pressed ...');
+                                                  },
+                                                ),
+                                              ),
+                                              Text(
+                                                '1',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 20.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 40.0,
+                                                  icon: Icon(
+                                                    Icons.comment_outlined,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () {
+                                                    print(
+                                                        'IconButton pressed ...');
+                                                  },
+                                                ),
+                                              ),
+                                              Text(
+                                                '1',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Padding(

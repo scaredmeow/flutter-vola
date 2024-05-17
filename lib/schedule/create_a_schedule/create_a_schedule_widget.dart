@@ -392,8 +392,10 @@ class _CreateAScheduleWidgetState extends State<CreateAScheduleWidget> {
                           date: _model.gameDateTextController.text,
                           location: _model.locationTextController.text,
                         );
-
-                        context.goNamed('Schedule');
+                        if (Navigator.of(context).canPop()) {
+                          context.pop();
+                        }
+                        context.pushNamed('Schedule');
 
                         setState(() {});
                       },

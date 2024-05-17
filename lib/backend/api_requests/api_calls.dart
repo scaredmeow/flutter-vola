@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -17,6 +19,31 @@ class GetUserByUIDCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Get User by UID',
       apiUrl: 'https://py-flask-vola.onrender.com/api/v1/users/get',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SearchForATeamCall {
+  static Future<ApiCallResponse> call({
+    String? name = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "name": "$name"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Search for a Team',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/teams/search',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -223,19 +250,19 @@ class GetAllTeamsCall {
 
 class CreateANewTeamCall {
   static Future<ApiCallResponse> call({
-    int? sportsId,
     String? userId = '',
     String? name = '',
     String? description = '',
     String? image = '',
+    String? sportsName = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "sport_id": $sportsId,
   "user_id": "$userId",
   "name": "$name",
   "description": "$description",
-  "image": "$image"
+  "image": "$image",
+  "sports_name": "$sportsName"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Create a new team',
@@ -597,6 +624,9 @@ String _serializeList(List? list) {
   try {
     return json.encode(list);
   } catch (_) {
+    if (kDebugMode) {
+      print("List serialization failed. Returning empty list.");
+    }
     return '[]';
   }
 }
@@ -606,6 +636,9 @@ String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   try {
     return json.encode(jsonVar);
   } catch (_) {
+    if (kDebugMode) {
+      print("Json serialization failed. Returning empty json.");
+    }
     return isList ? '[]' : '{}';
   }
 }

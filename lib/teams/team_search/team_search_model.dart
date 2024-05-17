@@ -1,23 +1,27 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/unauthorizedacc_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'home_widget.dart' show HomeWidget;
+import 'team_search_widget.dart' show TeamSearchWidget;
 import 'package:flutter/material.dart';
 
-class HomeModel extends FlutterFlowModel<HomeWidget> {
+class TeamSearchModel extends FlutterFlowModel<TeamSearchWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (Get User by UID)] action in Home widget.
-  ApiCallResponse? getUserRole;
   Completer<ApiCallResponse>? apiRequestCompleter;
+  // Model for unauthorizedacc component.
+  late UnauthorizedaccModel unauthorizedaccModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    unauthorizedaccModel = createModel(context, () => UnauthorizedaccModel());
+  }
 
   @override
   void dispose() {
     unfocusNode.dispose();
+    unauthorizedaccModel.dispose();
   }
 
   /// Additional helper methods.

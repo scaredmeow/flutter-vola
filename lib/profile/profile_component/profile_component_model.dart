@@ -17,38 +17,106 @@ class ProfileComponentModel extends FlutterFlowModel<ProfileComponentWidget> {
   FocusNode? firstNameFocusNode;
   TextEditingController? firstNameTextController;
   String? Function(BuildContext, String?)? firstNameTextControllerValidator;
+  String? _firstNameTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for middleName widget.
   FocusNode? middleNameFocusNode;
   TextEditingController? middleNameTextController;
   String? Function(BuildContext, String?)? middleNameTextControllerValidator;
+  String? _middleNameTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for lastName widget.
   FocusNode? lastNameFocusNode;
   TextEditingController? lastNameTextController;
   String? Function(BuildContext, String?)? lastNameTextControllerValidator;
+  String? _lastNameTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
   String? Function(BuildContext, String?)? emailTextControllerValidator;
+  String? _emailTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for phoneNumber widget.
   FocusNode? phoneNumberFocusNode;
   TextEditingController? phoneNumberTextController;
   String? Function(BuildContext, String?)? phoneNumberTextControllerValidator;
+  String? _phoneNumberTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for gender widget.
   FocusNode? genderFocusNode;
   TextEditingController? genderTextController;
   String? Function(BuildContext, String?)? genderTextControllerValidator;
+  String? _genderTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for birthdate widget.
   FocusNode? birthdateFocusNode;
   TextEditingController? birthdateTextController;
   final birthdateMask = MaskTextInputFormatter(mask: '####-##-##');
   String? Function(BuildContext, String?)? birthdateTextControllerValidator;
+  String? _birthdateTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   DateTime? datePicked;
   // State field(s) for coachAthlet widget.
   String? coachAthletValue;
   FormFieldController<String>? coachAthletValueController;
+  // State field(s) for Checkbox widget.
+  bool? checkboxValue;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    firstNameTextControllerValidator = _firstNameTextControllerValidator;
+    middleNameTextControllerValidator = _middleNameTextControllerValidator;
+    lastNameTextControllerValidator = _lastNameTextControllerValidator;
+    emailTextControllerValidator = _emailTextControllerValidator;
+    phoneNumberTextControllerValidator = _phoneNumberTextControllerValidator;
+    genderTextControllerValidator = _genderTextControllerValidator;
+    birthdateTextControllerValidator = _birthdateTextControllerValidator;
+  }
 
   @override
   void dispose() {

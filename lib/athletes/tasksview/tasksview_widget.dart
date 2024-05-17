@@ -147,8 +147,10 @@ class _TasksviewWidgetState extends State<TasksviewWidget> {
                       userId: currentUserUid,
                       taskId: widget.taskId,
                     );
-
-                    context.goNamed('team_dashboard');
+                    if (Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
+                    context.pushNamed('team_dashboard');
 
                     setState(() {});
                   },

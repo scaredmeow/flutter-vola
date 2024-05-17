@@ -1,15 +1,12 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:async';
-import '/backend/schema/structs/index.dart';
 import 'package:flutter/material.dart';
 import 'create_a_team_model.dart';
 export 'create_a_team_model.dart';
@@ -36,6 +33,9 @@ class _CreateATeamWidgetState extends State<CreateATeamWidget> {
 
     _model.descriptionTextController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
+
+    _model.sportsTextController ??= TextEditingController();
+    _model.sportsFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -226,85 +226,61 @@ class _CreateATeamWidgetState extends State<CreateATeamWidget> {
                                       .asValidator(context),
                                 ),
                               ),
-                              FutureBuilder<ApiCallResponse>(
-                                future: FFAppState().sportList(
-                                  requestFn: () => GetAllSportsCall.call(),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
+                              TextFormField(
+                                controller: _model.sportsTextController,
+                                focusNode: _model.sportsFocusNode,
+                                autofocus: false,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Sports',
+                                  hintText: 'Enter sport name...',
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
                                       ),
-                                    );
-                                  }
-                                  final dropDownGetAllSportsResponse =
-                                      snapshot.data!;
-                                  return FlutterFlowDropDown<int>(
-                                    controller:
-                                        _model.dropDownValueController ??=
-                                            FormFieldController<int>(null),
-                                    options:
-                                        List<int>.from(
-                                            (dropDownGetAllSportsResponse
-                                                        .jsonBody
-                                                        .toList()
-                                                        .map<SportsStruct?>(
-                                                            SportsStruct
-                                                                .maybeFromMap)
-                                                        .toList()
-                                                    as Iterable<SportsStruct?>)
-                                                .withoutNulls
-                                                .map((e) => e.id)
-                                                .toList()),
-                                    optionLabels: (dropDownGetAllSportsResponse
-                                                .jsonBody
-                                                .toList()
-                                                .map<SportsStruct?>(
-                                                    SportsStruct.maybeFromMap)
-                                                .toList()
-                                            as Iterable<SportsStruct?>)
-                                        .withoutNulls
-                                        .map((e) => e.name)
-                                        .toList(),
-                                    onChanged: (val) => setState(
-                                        () => _model.dropDownValue = val),
-                                    height: 56.0,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          letterSpacing: 0.0,
-                                        ),
-                                    hintText: 'Please select...',
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down_rounded,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
+                                          .primaryText,
+                                      width: 2.0,
                                     ),
-                                    elevation: 2.0,
-                                    borderColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    borderWidth: 2.0,
-                                    borderRadius: 8.0,
-                                    margin: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 4.0, 16.0, 4.0),
-                                    hidesUnderline: true,
-                                    isOverButton: true,
-                                    isSearchable: false,
-                                    isMultiSelect: false,
-                                  );
-                                },
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  contentPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          20.0, 32.0, 20.0, 12.0),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineSmall
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      letterSpacing: 0.0,
+                                    ),
+                                validator: _model.sportsTextControllerValidator
+                                    .asValidator(context),
                               ),
                             ],
                           ),
@@ -408,23 +384,23 @@ class _CreateATeamWidgetState extends State<CreateATeamWidget> {
                                   !_model.formKey.currentState!.validate()) {
                                 return;
                               }
-                              if (_model.dropDownValue == null) {
-                                return;
-                              }
                               unawaited(
                                 () async {
                                   _model.apiResult8r7 =
                                       await CreateANewTeamCall.call(
-                                    sportsId: _model.dropDownValue,
                                     userId: currentUserUid,
                                     name: _model.nameTextController.text,
                                     description:
                                         _model.descriptionTextController.text,
                                     image: _model.uploadedFileUrl,
+                                    sportsName:
+                                        _model.sportsTextController.text,
                                   );
                                 }(),
                               );
-
+                              if (Navigator.of(context).canPop()) {
+                                context.pop();
+                              }
                               context.pushNamed('Teams');
 
                               setState(() {});

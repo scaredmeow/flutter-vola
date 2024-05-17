@@ -31,4 +31,7 @@ class TeamsRow extends SupabaseDataRow {
 
   int? get organizationId => getField<int>('organization_id');
   set organizationId(int? value) => setField<int>('organization_id', value);
+
+  String? get image => getField<String>('image');
+  set image(String? value) => setField<String>('image', value);
 }
