@@ -11,6 +11,10 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   // Stores action output result for [Backend Call - API (Get User by UID)] action in Home widget.
   ApiCallResponse? getUserRole;
   Completer<ApiCallResponse>? apiRequestCompleter;
+  // Stores action output result for [Backend Call - API (Unlike)] action in ToggleIcon widget.
+  ApiCallResponse? apiResultcwt;
+  // Stores action output result for [Backend Call - API (Like)] action in ToggleIcon widget.
+  ApiCallResponse? apiResultcxx;
 
   @override
   void initState(BuildContext context) {}

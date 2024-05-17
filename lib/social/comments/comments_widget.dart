@@ -252,16 +252,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                             userId: currentUserUid,
                             postId: widget.postId,
                           );
-
-                          context.pushNamed(
-                            'comments',
-                            queryParameters: {
-                              'postId': serializeParam(
-                                widget.postId,
-                                ParamType.int,
-                              ),
-                            }.withoutNulls,
-                          );
+                          setState(() {});
 
                           setState(() {});
                         },
@@ -380,7 +371,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                                   child: Image.network(
                                                     valueOrDefault<String>(
                                                       commentItem.user.image,
-                                                      'https://images.unsplash.com/photo-1520339766321-e0b045b26a48?w=1280&h=720',
+                                                      'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
                                                     ),
                                                     width: 40.0,
                                                     height: 40.0,

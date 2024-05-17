@@ -87,6 +87,56 @@ class SearchForATeamCall {
   }
 }
 
+class LikeCall {
+  static Future<ApiCallResponse> call({
+    String? id = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": "$id"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Like',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/posts/like',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UnlikeCall {
+  static Future<ApiCallResponse> call({
+    String? id = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "id": "$id"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Unlike',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/posts/unlike',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class GetAllPostsCall {
   static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(

@@ -12,6 +12,7 @@ export 'pagination_struct.dart';
 export 'pending_struct.dart';
 export 'pending_tasks_struct.dart';
 export 'percentage_struct.dart';
+export 'posts_struct.dart';
 export 'progress_struct.dart';
 export 'sport_struct.dart';
 export 'sports_struct.dart';

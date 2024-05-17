@@ -110,136 +110,148 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              FutureBuilder<ApiCallResponse>(
-                future:
-                    (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
-                          ..complete(GetAllPostsCall.call()))
-                        .future,
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
-                            ),
-                          ),
+          child: FutureBuilder<ApiCallResponse>(
+            future: (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
+                  ..complete(GetAllPostsCall.call()))
+                .future,
+            builder: (context, snapshot) {
+              // Customize what your widget looks like when it's loading.
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          FlutterFlowTheme.of(context).primary,
                         ),
                       ),
-                    );
-                  }
-                  final listViewGetAllPostsResponse = snapshot.data!;
-                  return Builder(
-                    builder: (context) {
-                      final posts = ((listViewGetAllPostsResponse.jsonBody
-                                      .toList()
-                                      .map<DataStruct?>(DataStruct.maybeFromMap)
-                                      .toList() as Iterable<DataStruct?>)
-                                  .withoutNulls
-                                  .toList() ??
-                              [])
-                          .take(50)
-                          .toList();
-                      return RefreshIndicator(
-                        onRefresh: () async {
-                          setState(() => _model.apiRequestCompleter = null);
-                        },
-                        child: ListView.separated(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: posts.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 8.0),
-                          itemBuilder: (context, postsIndex) {
-                            final postsItem = posts[postsIndex];
-                            return Padding(
+                    ),
+                  ),
+                );
+              }
+              final listViewGetAllPostsResponse = snapshot.data!;
+              return Builder(
+                builder: (context) {
+                  final posts = ((listViewGetAllPostsResponse.jsonBody
+                                  .toList()
+                                  .map<DataStruct?>(DataStruct.maybeFromMap)
+                                  .toList() as Iterable<DataStruct?>)
+                              .withoutNulls
+                              .toList() ??
+                          [])
+                      .take(50)
+                      .toList();
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      setState(() => _model.apiRequestCompleter = null);
+                    },
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: posts.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 8.0),
+                      itemBuilder: (context, postsIndex) {
+                        final postsItem = posts[postsIndex];
+                        return Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 12.0, 12.0, 12.0),
-                                  child: Column(
+                                  12.0, 12.0, 12.0, 12.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 6.0, 0.0),
-                                              child: Container(
-                                                width: 45.0,
-                                                height: 45.0,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration:
-                                                      const Duration(milliseconds: 0),
-                                                  fadeOutDuration:
-                                                      const Duration(milliseconds: 0),
-                                                  imageUrl:
-                                                      valueOrDefault<String>(
-                                                    postsItem.user.image,
-                                                    'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
-                                                  ),
-                                                  fit: BoxFit.cover,
-                                                ),
+                                      Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 6.0, 0.0),
+                                          child: Container(
+                                            width: 45.0,
+                                            height: 45.0,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  const Duration(milliseconds: 0),
+                                              fadeOutDuration:
+                                                  const Duration(milliseconds: 0),
+                                              imageUrl: valueOrDefault<String>(
+                                                postsItem.user.image,
+                                                'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
                                               ),
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  '${valueOrDefault<String>(
-                                                    postsItem.user.firstName,
-                                                    'First Name ',
-                                                  )} ${valueOrDefault<String>(
-                                                    postsItem.user.lastName,
-                                                    'Last Name ',
-                                                  )}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${valueOrDefault<String>(
+                                                postsItem.user.firstName,
+                                                'First Name ',
+                                              )} ${valueOrDefault<String>(
+                                                postsItem.user.lastName,
+                                                'Last Name ',
+                                              )}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
                                                             'Readex Pro',
                                                         letterSpacing: 0.0,
                                                       ),
-                                                ),
+                                            ),
+                                            Text(
+                                              valueOrDefault<String>(
+                                                postsItem
+                                                    .user.activeRole.roleName,
+                                                'User',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
                                                 Text(
                                                   valueOrDefault<String>(
-                                                    postsItem.user.activeRole
-                                                        .roleName,
-                                                    'User',
+                                                    postsItem
+                                                        .postDateStringRepr,
+                                                    'Posted Recently',
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -250,310 +262,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        postsItem
-                                                            .postDateStringRepr,
-                                                        'Posted Recently',
-                                                      ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .labelSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                'Readex Pro',
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  6.0,
-                                                                  0.0,
-                                                                  6.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        '•',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelSmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                    Icon(
-                                                      Icons.public,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      size: 12.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 12.0, 0.0, 0.0),
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            postsItem.title,
-                                            'Title',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 4.0, 0.0, 0.0),
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            postsItem.content,
-                                            'Content',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 6.0, 0.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            await Navigator.push(
-                                              context,
-                                              PageTransition(
-                                                type: PageTransitionType.fade,
-                                                child:
-                                                    FlutterFlowExpandedImageView(
-                                                  image: CachedNetworkImage(
-                                                    fadeInDuration: const Duration(
-                                                        milliseconds: 0),
-                                                    fadeOutDuration: const Duration(
-                                                        milliseconds: 0),
-                                                    imageUrl:
-                                                        valueOrDefault<String>(
-                                                      postsItem.image,
-                                                      'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
-                                                    ),
-                                                    fit: BoxFit.contain,
-                                                  ),
-                                                  allowRotation: false,
-                                                  tag: valueOrDefault<String>(
-                                                    postsItem.image,
-                                                    'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png' '$postsIndex',
-                                                  ),
-                                                  useHeroAnimation: true,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: Hero(
-                                            tag: valueOrDefault<String>(
-                                              postsItem.image,
-                                              'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png' '$postsIndex',
-                                            ),
-                                            transitionOnUserGestures: true,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              child: CachedNetworkImage(
-                                                fadeInDuration:
-                                                    const Duration(milliseconds: 0),
-                                                fadeOutDuration:
-                                                    const Duration(milliseconds: 0),
-                                                imageUrl:
-                                                    valueOrDefault<String>(
-                                                  postsItem.image,
-                                                  'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
-                                                ),
-                                                width: double.infinity,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            ToggleIcon(
-                                              onPressed: () async {
-                                                setState(() => FFAppState()
-                                                    .like = !FFAppState().like);
-                                                if (FFAppState().like ==
-                                                    false) {
-                                                  context.pushNamed(
-                                                    'comments',
-                                                    queryParameters: {
-                                                      'postId': serializeParam(
-                                                        postsItem.id,
-                                                        ParamType.int,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                }
-                                              },
-                                              value: FFAppState().like,
-                                              onIcon: Icon(
-                                                Icons.thumb_up_alt,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 25.0,
-                                              ),
-                                              offIcon: Icon(
-                                                Icons.thumb_up_off_alt,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 25.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                postsItem.likes.toString(),
-                                                '0',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                borderColor: Colors.transparent,
-                                                borderRadius: 20.0,
-                                                borderWidth: 1.0,
-                                                buttonSize: 40.0,
-                                                icon: Icon(
-                                                  Icons.comment_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 24.0,
-                                                ),
-                                                onPressed: () async {
-                                                  context.pushNamed(
-                                                    'comments',
-                                                    queryParameters: {
-                                                      'postId': serializeParam(
-                                                        postsItem.id,
-                                                        ParamType.int,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                postsItem.commentsCount
-                                                    .toString(),
-                                                '0',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 12.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            if (false)
-                                              Text(
-                                                '${valueOrDefault<String>(
-                                                  postsItem.likes.toString(),
-                                                  '0',
-                                                )} ${(int likes) {
-                                                  return likes > 1
-                                                      ? "likes"
-                                                      : "like";
-                                                }(postsItem.likes)}',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      fontSize: 12.0,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                              ),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                if (false)
-                                                  Text(
-                                                    '${valueOrDefault<String>(
-                                                      postsItem.commentsCount
-                                                          .toString(),
-                                                      '0',
-                                                    )} ${(int comments) {
-                                                      return comments > 1
-                                                          ? "comments"
-                                                          : "comment";
-                                                    }(valueOrDefault<int>(
-                                                      postsItem.commentsCount,
-                                                      0,
-                                                    ))}',
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          6.0, 0.0, 6.0, 0.0),
+                                                  child: Text(
+                                                    '•',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .labelSmall
@@ -563,75 +277,327 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
+                                                ),
+                                                Icon(
+                                                  Icons.public,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 12.0,
+                                                ),
                                               ],
                                             ),
                                           ],
                                         ),
                                       ),
-                                      if (false)
-                                        Divider(
-                                          height: 24.0,
-                                          thickness: 1.0,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 12.0, 0.0, 0.0),
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        postsItem.title,
+                                        'Title',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 4.0, 0.0, 0.0),
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        postsItem.content,
+                                        'Content',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 6.0, 0.0, 0.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            child: FlutterFlowExpandedImageView(
+                                              image: CachedNetworkImage(
+                                                fadeInDuration:
+                                                    const Duration(milliseconds: 0),
+                                                fadeOutDuration:
+                                                    const Duration(milliseconds: 0),
+                                                imageUrl:
+                                                    valueOrDefault<String>(
+                                                  postsItem.image,
+                                                  'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
+                                                ),
+                                                fit: BoxFit.contain,
+                                              ),
+                                              allowRotation: false,
+                                              tag: valueOrDefault<String>(
+                                                postsItem.image,
+                                                'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png' '$postsIndex',
+                                              ),
+                                              useHeroAnimation: true,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Hero(
+                                        tag: valueOrDefault<String>(
+                                          postsItem.image,
+                                          'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png' '$postsIndex',
                                         ),
-                                      if (false)
+                                        transitionOnUserGestures: true,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          child: CachedNetworkImage(
+                                            fadeInDuration:
+                                                const Duration(milliseconds: 0),
+                                            fadeOutDuration:
+                                                const Duration(milliseconds: 0),
+                                            imageUrl: valueOrDefault<String>(
+                                              postsItem.image,
+                                              'https://jvkmtyoxcclkryubmnkh.supabase.co/storage/v1/object/public/cdn/28bd131c-81ae-4d97-81c8-4a4a68e485ce/1714676678721000.png',
+                                            ),
+                                            width: double.infinity,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ToggleIcon(
+                                          onPressed: () async {
+                                            setState(() => FFAppState().like =
+                                                !FFAppState().like);
+                                            if (FFAppState().like == false) {
+                                              _model.apiResultcwt =
+                                                  await UnlikeCall.call();
+                                            } else {
+                                              _model.apiResultcxx =
+                                                  await LikeCall.call();
+                                            }
+
+                                            setState(() {});
+                                          },
+                                          value: FFAppState().like,
+                                          onIcon: Icon(
+                                            Icons.thumb_up_alt,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 25.0,
+                                          ),
+                                          offIcon: Icon(
+                                            Icons.thumb_up_off_alt,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 25.0,
+                                          ),
+                                        ),
+                                        Text(
+                                          valueOrDefault<String>(
+                                            postsItem.likes.toString(),
+                                            '0',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 20.0,
+                                            borderWidth: 1.0,
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.comment_outlined,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              context.pushNamed(
+                                                'comments',
+                                                queryParameters: {
+                                                  'postId': serializeParam(
+                                                    postsItem.id,
+                                                    ParamType.int,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        Text(
+                                          valueOrDefault<String>(
+                                            postsItem.commentsCount.toString(),
+                                            '0',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 12.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        if (false)
+                                          Text(
+                                            '${valueOrDefault<String>(
+                                              postsItem.likes.toString(),
+                                              '0',
+                                            )} ${(int likes) {
+                                              return likes > 1
+                                                  ? "likes"
+                                                  : "like";
+                                            }(postsItem.likes)}',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 12.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                buttonSize: 40.0,
-                                                icon: Icon(
-                                                  Icons.thumb_up_off_alt,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
-                                                onPressed: () {
-                                                  print(
-                                                      'IconButton pressed ...');
-                                                },
+                                            if (false)
+                                              Text(
+                                                '${valueOrDefault<String>(
+                                                  postsItem.commentsCount
+                                                      .toString(),
+                                                  '0',
+                                                )} ${(int comments) {
+                                                  return comments > 1
+                                                      ? "comments"
+                                                      : "comment";
+                                                }(valueOrDefault<int>(
+                                                  postsItem.commentsCount,
+                                                  0,
+                                                ))}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 12.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                buttonSize: 40.0,
-                                                icon: Icon(
-                                                  Icons.mode_comment_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
-                                                onPressed: () {
-                                                  print(
-                                                      'IconButton pressed ...');
-                                                },
-                                              ),
-                                            ),
                                           ],
                                         ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
+                                  if (false)
+                                    Divider(
+                                      height: 24.0,
+                                      thickness: 1.0,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                    ),
+                                  if (false)
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 12.0, 0.0),
+                                          child: FlutterFlowIconButton(
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.thumb_up_off_alt,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                            },
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 12.0, 0.0),
+                                          child: FlutterFlowIconButton(
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.mode_comment_outlined,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                ],
                               ),
-                            );
-                          },
-                        ),
-                      );
-                    },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),

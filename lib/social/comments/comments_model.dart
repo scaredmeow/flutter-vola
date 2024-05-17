@@ -4,6 +4,10 @@ import 'comments_widget.dart' show CommentsWidget;
 import 'package:flutter/material.dart';
 
 class CommentsModel extends FlutterFlowModel<CommentsWidget> {
+  ///  Local state fields for this page.
+
+  bool ab = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
