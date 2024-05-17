@@ -254,6 +254,16 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                           );
                           setState(() {});
 
+                          context.pushNamed(
+                            'comments',
+                            queryParameters: {
+                              'postId': serializeParam(
+                                widget.postId,
+                                ParamType.int,
+                              ),
+                            }.withoutNulls,
+                          );
+
                           setState(() {});
                         },
                         text: 'Add Comment',
