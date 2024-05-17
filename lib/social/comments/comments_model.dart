@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'comments_widget.dart' show CommentsWidget;
 import 'package:flutter/material.dart';
@@ -6,18 +7,12 @@ class CommentsModel extends FlutterFlowModel<CommentsWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
+  // State field(s) for comment widget.
+  FocusNode? commentFocusNode;
+  TextEditingController? commentTextController;
+  String? Function(BuildContext, String?)? commentTextControllerValidator;
+  // Stores action output result for [Backend Call - API (Create a Comment)] action in Button widget.
+  ApiCallResponse? apiResult0x1;
 
   @override
   void initState(BuildContext context) {}
@@ -25,13 +20,7 @@ class CommentsModel extends FlutterFlowModel<CommentsWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
-
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
-
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
+    commentFocusNode?.dispose();
+    commentTextController?.dispose();
   }
 }

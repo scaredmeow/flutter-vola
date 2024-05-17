@@ -119,9 +119,7 @@ class _TeamSearchWidgetState extends State<TeamSearchWidget> {
                             FutureBuilder<ApiCallResponse>(
                               future: (_model.apiRequestCompleter ??=
                                       Completer<ApiCallResponse>()
-                                        ..complete(SearchForATeamCall.call(
-                                          name: widget.team,
-                                        )))
+                                        ..complete(SearchForATeamCall.call()))
                                   .future,
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.

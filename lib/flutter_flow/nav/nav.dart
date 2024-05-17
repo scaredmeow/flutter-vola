@@ -257,7 +257,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'comments',
           path: '/comments',
-          builder: (context, params) => const CommentsWidget(),
+          builder: (context, params) => CommentsWidget(
+            postId: params.getParam(
+              'postId',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'ForgotPassword01',
@@ -268,6 +273,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'forgotPassword',
           path: '/forgotPassword',
           builder: (context, params) => const ForgotPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'changepassword',
+          path: '/changepassword',
+          builder: (context, params) => const ChangepasswordWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

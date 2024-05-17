@@ -47,6 +47,12 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_teamID', value);
   }
 
+  bool _like = false;
+  bool get like => _like;
+  set like(bool value) {
+    _like = value;
+  }
+
   final _statsListManager = FutureRequestManager<ApiCallResponse>();
   Future<ApiCallResponse> statsList({
     String? uniqueQueryKey,

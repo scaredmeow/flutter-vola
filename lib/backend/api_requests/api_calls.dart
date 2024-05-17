@@ -33,6 +33,35 @@ class GetUserByUIDCall {
   }
 }
 
+class CreateACommentCall {
+  static Future<ApiCallResponse> call({
+    String? content = '',
+    String? userId = '',
+    int? postId,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "user_id": "$userId",
+  "content": "$content"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create a Comment',
+      apiUrl:
+          'https://py-flask-vola.onrender.com/api/v1/posts/$postId/comment',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class SearchForATeamCall {
   static Future<ApiCallResponse> call({
     String? name = '',
@@ -42,7 +71,7 @@ class SearchForATeamCall {
   "name": "$name"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'Search for a Team',
+      callName: 'Search for a Team ',
       apiUrl: 'https://py-flask-vola.onrender.com/api/v1/teams/search',
       callType: ApiCallType.POST,
       headers: {},
@@ -63,6 +92,25 @@ class GetAllPostsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Get All Posts',
       apiUrl: 'https://py-flask-vola.onrender.com/api/v1/posts',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: true,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetOnePostCall {
+  static Future<ApiCallResponse> call({
+    int? postId,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get One Post',
+      apiUrl: 'https://py-flask-vola.onrender.com/api/v1/posts/$postId',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

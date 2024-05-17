@@ -32,3 +32,5 @@ export '/forgot_password01/forgot_password01_widget.dart'
     show ForgotPassword01Widget;
 export '/auth/forgot_password/forgot_password_widget.dart'
     show ForgotPasswordWidget;
+export '/profile/changepassword/changepassword_widget.dart'
+    show ChangepasswordWidget;
