@@ -154,6 +154,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                         confirmButtonText: 'Save Changes',
                         imageButtonText: 'Update Photo',
                         email: currentUserEmail,
+                        showText: true,
                         navigateAction: () async {
                           context.safePop();
                         },

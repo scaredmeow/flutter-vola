@@ -112,49 +112,47 @@ class _TeamDashboardWidgetState extends State<TeamDashboardWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          if (false)
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 8.0, 0.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    GetOneStruct.maybeFromMap(
-                                            columnGetOneTeamResponse.jsonBody)
-                                        ?.name,
-                                    'Team Name',
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineLarge
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ),
-                          if (false)
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 8.0, 0.0, 0.0),
-                                child: Text(
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 8.0, 0.0, 0.0),
+                              child: Text(
+                                valueOrDefault<String>(
                                   GetOneStruct.maybeFromMap(
-                                          columnGetOneTeamResponse.jsonBody)!
-                                      .sportsName,
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        letterSpacing: 0.0,
-                                      ),
+                                          columnGetOneTeamResponse.jsonBody)
+                                      ?.name,
+                                  'Team Name',
                                 ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineLarge
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ),
+                          ),
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 8.0, 0.0, 0.0),
+                              child: Text(
+                                GetOneStruct.maybeFromMap(
+                                        columnGetOneTeamResponse.jsonBody)!
+                                    .sportsName,
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ),
+                          ),
                           if (valueOrDefault<bool>(
                             (String userRole, String teamId) {
                               return userRole == "COACH" ? true : false;
