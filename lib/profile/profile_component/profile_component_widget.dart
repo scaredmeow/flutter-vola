@@ -871,107 +871,105 @@ class _ProfileComponentWidgetState extends State<ProfileComponentWidget> {
                     isMultiSelect: false,
                   ),
                 ),
-                if (widget.showText ?? true)
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 16.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                4.0, 0.0, 8.0, 0.0),
-                            child: Theme(
-                              data: ThemeData(
-                                checkboxTheme: CheckboxThemeData(
-                                  visualDensity: VisualDensity.compact,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
+                Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 16.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              4.0, 0.0, 8.0, 0.0),
+                          child: Theme(
+                            data: ThemeData(
+                              checkboxTheme: CheckboxThemeData(
+                                visualDensity: VisualDensity.compact,
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
                                 ),
-                                unselectedWidgetColor:
+                              ),
+                              unselectedWidgetColor:
+                                  FlutterFlowTheme.of(context).secondaryText,
+                            ),
+                            child: Checkbox(
+                              value: _model.checkboxValue ??= false,
+                              onChanged: (newValue) async {
+                                setState(
+                                    () => _model.checkboxValue = newValue!);
+                              },
+                              side: BorderSide(
+                                width: 2,
+                                color:
                                     FlutterFlowTheme.of(context).secondaryText,
                               ),
-                              child: Checkbox(
-                                value: _model.checkboxValue ??= false,
-                                onChanged: (newValue) async {
-                                  setState(
-                                      () => _model.checkboxValue = newValue!);
-                                },
-                                side: BorderSide(
-                                  width: 2,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                ),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primary,
-                                checkColor: FlutterFlowTheme.of(context).info,
-                              ),
+                              activeColor: FlutterFlowTheme.of(context).primary,
+                              checkColor: FlutterFlowTheme.of(context).info,
                             ),
                           ),
-                          Container(
-                            width: MediaQuery.sizeOf(context).width * 0.8,
-                            constraints: const BoxConstraints(
-                              minWidth: 400.0,
-                            ),
-                            decoration: const BoxDecoration(),
-                            child: Wrap(
-                              spacing: 0.0,
-                              runSpacing: 0.0,
-                              alignment: WrapAlignment.start,
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              direction: Axis.horizontal,
-                              runAlignment: WrapAlignment.start,
-                              verticalDirection: VerticalDirection.down,
-                              clipBehavior: Clip.none,
-                              children: [
-                                Text(
-                                  'Before proceeding please read and accept the ',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 16.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await launchURL(
-                                          'https://docs.google.com/document/d/1WNUKfk7VWORkAeh5ulfgpOPbnEkoqywOLu8ejVVGVUc/edit?usp=sharing');
-                                    },
-                                    child: Text(
-                                      'data privacy and terms and conditions',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            letterSpacing: 0.0,
-                                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.8,
+                          constraints: const BoxConstraints(
+                            minWidth: 400.0,
+                          ),
+                          decoration: const BoxDecoration(),
+                          child: Wrap(
+                            spacing: 0.0,
+                            runSpacing: 0.0,
+                            alignment: WrapAlignment.start,
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            direction: Axis.horizontal,
+                            runAlignment: WrapAlignment.start,
+                            verticalDirection: VerticalDirection.down,
+                            clipBehavior: Clip.none,
+                            children: [
+                              Text(
+                                'Before proceeding please read and accept the ',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      letterSpacing: 0.0,
                                     ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 16.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await launchURL(
+                                        'https://docs.google.com/document/d/1WNUKfk7VWORkAeh5ulfgpOPbnEkoqywOLu8ejVVGVUc/edit?usp=sharing');
+                                  },
+                                  child: Text(
+                                    'data privacy and terms and conditions',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
+                ),
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
