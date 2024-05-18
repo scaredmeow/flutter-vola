@@ -427,6 +427,18 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             size: 25.0,
                                           ),
                                         ),
+                                        Text(
+                                          valueOrDefault<String>(
+                                            postsItem.likes.toString(),
+                                            '0',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
                                         Align(
                                           alignment:
                                               const AlignmentDirectional(0.0, 0.0),
