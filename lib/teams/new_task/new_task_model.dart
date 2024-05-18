@@ -22,6 +22,7 @@ class NewTaskModel extends FlutterFlowModel<NewTaskWidget> {
   TextEditingController? duedateTextController;
   final duedateMask = MaskTextInputFormatter(mask: '####-##-##');
   String? Function(BuildContext, String?)? duedateTextControllerValidator;
+  DateTime? datePicked;
   // Stores action output result for [Backend Call - API (Create Tasks)] action in Button widget.
   ApiCallResponse? apiResultano;
 

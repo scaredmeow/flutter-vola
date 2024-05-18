@@ -139,7 +139,7 @@ class _TeamPageWidgetState extends State<TeamPageWidget> {
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 8.0, 16.0, 16.0),
+                            16.0, 8.0, 16.0, 4.0),
                         child: Text(
                           valueOrDefault<String>(
                             GetOneStruct.maybeFromMap(
@@ -149,6 +149,27 @@ class _TeamPageWidgetState extends State<TeamPageWidget> {
                           ),
                           style: FlutterFlowTheme.of(context)
                               .headlineLarge
+                              .override(
+                                fontFamily: 'Outfit',
+                                letterSpacing: 0.0,
+                              ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 4.0, 16.0, 16.0),
+                        child: Text(
+                          valueOrDefault<String>(
+                            GetOneStruct.maybeFromMap(
+                                    teamPageGetOneTeamResponse.jsonBody)
+                                ?.sportsName,
+                            'Sports Team',
+                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
                               .override(
                                 fontFamily: 'Outfit',
                                 letterSpacing: 0.0,

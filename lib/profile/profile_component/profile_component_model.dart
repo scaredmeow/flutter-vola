@@ -76,17 +76,8 @@ class ProfileComponentModel extends FlutterFlowModel<ProfileComponentWidget> {
   }
 
   // State field(s) for gender widget.
-  FocusNode? genderFocusNode;
-  TextEditingController? genderTextController;
-  String? Function(BuildContext, String?)? genderTextControllerValidator;
-  String? _genderTextControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Field is required';
-    }
-
-    return null;
-  }
-
+  String? genderValue;
+  FormFieldController<String>? genderValueController;
   // State field(s) for birthdate widget.
   FocusNode? birthdateFocusNode;
   TextEditingController? birthdateTextController;
@@ -114,7 +105,6 @@ class ProfileComponentModel extends FlutterFlowModel<ProfileComponentWidget> {
     lastNameTextControllerValidator = _lastNameTextControllerValidator;
     emailTextControllerValidator = _emailTextControllerValidator;
     phoneNumberTextControllerValidator = _phoneNumberTextControllerValidator;
-    genderTextControllerValidator = _genderTextControllerValidator;
     birthdateTextControllerValidator = _birthdateTextControllerValidator;
   }
 
@@ -134,9 +124,6 @@ class ProfileComponentModel extends FlutterFlowModel<ProfileComponentWidget> {
 
     phoneNumberFocusNode?.dispose();
     phoneNumberTextController?.dispose();
-
-    genderFocusNode?.dispose();
-    genderTextController?.dispose();
 
     birthdateFocusNode?.dispose();
     birthdateTextController?.dispose();

@@ -157,7 +157,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                           Align(
                             alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Text(
-                              '${DataStruct.maybeFromMap(commentsGetOnePostResponse.jsonBody)?.user.firstName} ${DataStruct.maybeFromMap(commentsGetOnePostResponse.jsonBody)?.user.firstName}',
+                              '${DataStruct.maybeFromMap(commentsGetOnePostResponse.jsonBody)?.user.firstName} ${DataStruct.maybeFromMap(commentsGetOnePostResponse.jsonBody)?.user.lastName}',
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(

@@ -401,10 +401,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 !FFAppState().like);
                                             if (FFAppState().like == false) {
                                               _model.apiResultcwt =
-                                                  await UnlikeCall.call();
+                                                  await UnlikeCall.call(
+                                                id: postsItem.id.toString(),
+                                              );
                                             } else {
                                               _model.apiResultcxx =
-                                                  await LikeCall.call();
+                                                  await LikeCall.call(
+                                                id: postsItem.id.toString(),
+                                              );
                                             }
 
                                             setState(() {});
@@ -422,18 +426,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 .secondaryText,
                                             size: 25.0,
                                           ),
-                                        ),
-                                        Text(
-                                          valueOrDefault<String>(
-                                            postsItem.likes.toString(),
-                                            '0',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                letterSpacing: 0.0,
-                                              ),
                                         ),
                                         Align(
                                           alignment:

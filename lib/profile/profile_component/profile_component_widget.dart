@@ -62,8 +62,6 @@ class _ProfileComponentWidgetState extends State<ProfileComponentWidget> {
 
     _model.phoneNumberFocusNode ??= FocusNode();
 
-    _model.genderFocusNode ??= FocusNode();
-
     _model.birthdateFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -653,76 +651,45 @@ class _ProfileComponentWidgetState extends State<ProfileComponentWidget> {
                 Padding(
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 12.0),
-                  child: TextFormField(
-                    controller: _model.genderTextController ??=
-                        TextEditingController(
-                      text: UserStruct.maybeFromMap(
+                  child: FlutterFlowDropDown<String>(
+                    controller: _model.genderValueController ??=
+                        FormFieldController<String>(
+                      _model.genderValue ??= UserStruct.maybeFromMap(
                               columnGetUserByUIDResponse.jsonBody)
                           ?.gender,
                     ),
-                    focusNode: _model.genderFocusNode,
-                    autofillHints: const [AutofillHints.gender],
-                    textCapitalization: TextCapitalization.words,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Gender',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Readex Pro',
-                                letterSpacing: 0.0,
-                              ),
-                      hintText: 'Your gender',
-                      hintStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Readex Pro',
-                                letterSpacing: 0.0,
-                              ),
-                      errorStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Readex Pro',
-                                color: FlutterFlowTheme.of(context).error,
-                                letterSpacing: 0.0,
-                              ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      contentPadding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 12.0),
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    options: const ['Male', 'Female', 'Prefer not to Say'],
+                    onChanged: (val) =>
+                        setState(() => _model.genderValue = val),
+                    width: double.infinity,
+                    height: 56.0,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           letterSpacing: 0.0,
                         ),
-                    cursorColor: FlutterFlowTheme.of(context).primary,
-                    validator: _model.genderTextControllerValidator
-                        .asValidator(context),
+                    hintText: 'Gender',
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    elevation: 2.0,
+                    borderColor: FlutterFlowTheme.of(context).alternate,
+                    borderWidth: 2.0,
+                    borderRadius: 8.0,
+                    margin:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                    hidesUnderline: true,
+                    isOverButton: true,
+                    isSearchable: false,
+                    isMultiSelect: false,
+                    labelText: 'Gender',
+                    labelTextStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                   ),
                 ),
                 Stack(
@@ -1028,7 +995,7 @@ class _ProfileComponentWidgetState extends State<ProfileComponentWidget> {
                           firstName: _model.firstNameTextController.text,
                           middleName: _model.middleNameTextController.text,
                           lastName: _model.lastNameTextController.text,
-                          gender: _model.genderTextController.text,
+                          gender: _model.genderValue,
                           birthdate: _model.birthdateTextController.text,
                           image: _model.uploadedFileUrl,
                           phoneNumber: _model.phoneNumberTextController.text,
